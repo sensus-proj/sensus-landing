@@ -1,0 +1,178 @@
+[
+  {
+    "id": "3:861",
+    "name": "01 · Sensus — Bienvenida",
+    "fileName": "01_Sensus_Bienvenida_3_861.png",
+    "url": "/figma_screens/01_Sensus_Bienvenida_3_861.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "3:878",
+    "name": "02 · Sensus — Inicio de sesión",
+    "fileName": "02_Sensus_Inicio_de_sesion_3_878.png",
+    "url": "/figma_screens/02_Sensus_Inicio_de_sesion_3_878.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "3:920",
+    "name": "03 · Sensus — Registro",
+    "fileName": "03_Sensus_Registro_3_920.png",
+    "url": "/figma_screens/03_Sensus_Registro_3_920.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "3:1087",
+    "name": "04 · Sensus — Apartar como invitado",
+    "fileName": "04_Sensus_Apartar_como_invitado_3_1087.png",
+    "url": "/figma_screens/04_Sensus_Apartar_como_invitado_3_1087.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "3:975",
+    "name": "04 · Sensus — Inicio invitado",
+    "fileName": "04_Sensus_Inicio_invitado_3_975.png",
+    "url": "/figma_screens/04_Sensus_Inicio_invitado_3_975.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "54:2",
+    "name": "04 · Sensus — Inicio invitado",
+    "fileName": "04_Sensus_Inicio_invitado_54_2.png",
+    "url": "/figma_screens/04_Sensus_Inicio_invitado_54_2.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "16:1143",
+    "name": "04b - Inicio Invitado (Vista Mapa)",
+    "fileName": "04b_Inicio_Invitado_Vista_Mapa_16_1143.png",
+    "url": "/figma_screens/04b_Inicio_Invitado_Vista_Mapa_16_1143.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "5:1385",
+    "name": "05 · Sensus — Sensi AI: asistente de presupuesto",
+    "fileName": "05_Sensus_Sensi_AI_asistente_de_presupuesto_5_1385.png",
+    "url": "/figma_screens/05_Sensus_Sensi_AI_asistente_de_presupuesto_5_1385.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "89:689",
+    "name": "05 · Sensus — Sensi AI: asistente de presupuesto",
+    "fileName": "05_Sensus_Sensi_AI_asistente_de_presupuesto_89_689.png",
+    "url": "/figma_screens/05_Sensus_Sensi_AI_asistente_de_presupuesto_89_689.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "5:1452",
+    "name": "06 · Sensus — Búsqueda y filtros diversos",
+    "fileName": "06_Sensus_Busqueda_y_filtros_diversos_5_1452.png",
+    "url": "/figma_screens/06_Sensus_Busqueda_y_filtros_diversos_5_1452.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "124:1058",
+    "name": "06 · Sensus — Búsqueda y filtros diversos",
+    "fileName": "06_Sensus_Busqueda_y_filtros_diversos_124_1058.png",
+    "url": "/figma_screens/06_Sensus_Busqueda_y_filtros_diversos_124_1058.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "5:1571",
+    "name": "07 · Sensus — Detalle de producto y apartado",
+    "fileName": "07_Sensus_Detalle_de_producto_y_apartado_5_1571.png",
+    "url": "/figma_screens/07_Sensus_Detalle_de_producto_y_apartado_5_1571.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "5:1623",
+    "name": "08 · Sensus — Reserva con código QR",
+    "fileName": "08_Sensus_Reserva_con_codigo_QR_5_1623.png",
+    "url": "/figma_screens/08_Sensus_Reserva_con_codigo_QR_5_1623.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "9:1859",
+    "name": "09 · Panel de vendedor",
+    "fileName": "09_Panel_de_vendedor_9_1859.png",
+    "url": "/figma_screens/09_Panel_de_vendedor_9_1859.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "54:136",
+    "name": "09 · Panel de vendedor",
+    "fileName": "09_Panel_de_vendedor_54_136.png",
+    "url": "/figma_screens/09_Panel_de_vendedor_54_136.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "9:1971",
+    "name": "10 · Publicación rápida",
+    "fileName": "10_Publicacion_rapida_9_1971.png",
+    "url": "/figma_screens/10_Publicacion_rapida_9_1971.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "137:1580",
+    "name": "10 · Publicación rápida",
+    "fileName": "10_Publicacion_rapida_137_1580.png",
+    "url": "/figma_screens/10_Publicacion_rapida_137_1580.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "79:2",
+    "name": "11 - Ventas y Canjes",
+    "fileName": "11_Ventas_y_Canjes_79_2.png",
+    "url": "/figma_screens/11_Ventas_y_Canjes_79_2.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "9:2048",
+    "name": "11 · Estados vacíos",
+    "fileName": "11_Estados_vacios_9_2048.png",
+    "url": "/figma_screens/11_Estados_vacios_9_2048.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "28:551",
+    "name": "12 - Amigos Sensus",
+    "fileName": "12_Amigos_Sensus_28_551.png",
+    "url": "/figma_screens/12_Amigos_Sensus_28_551.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "79:116",
+    "name": "12 - Perfil del Vendedor",
+    "fileName": "12_Perfil_del_Vendedor_79_116.png",
+    "url": "/figma_screens/12_Perfil_del_Vendedor_79_116.png",
+    "width": 440,
+    "height": 956
+  },
+  {
+    "id": "96:304",
+    "name": "Notifications Center",
+    "fileName": "Notifications_Center_96_304.png",
+    "url": "/figma_screens/Notifications_Center_96_304.png",
+    "width": 440,
+    "height": 956
+  }
+]

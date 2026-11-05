@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sensus | Ofertas Cercanas, Ahorro Inteligente y Cero Mermas</title>
+  <meta name="description" content="Sensus centraliza en una sola app las mejores ofertas de supermercados y comercios locales en México. Ahorra hasta 50%, reduce mermas y cocina con Sensi IA.">
+  <link rel="canonical" href="https://rodnix.com.mx/sensus/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#7C3AED">
+
+  <!-- PALETA DE COLORES OFICIAL SENSUS (STARTUP UX/UI COMPACTO)
+       Morado Primario: #7C3AED (Marca, encabezados, Sensi IA, activos de menú)
+       Naranja de Acción: #F97316 (Botones comprar/apartar, -50%, temporizador QR, alertas merma)
+       Fondo Base: #F9FAFB (Lienzo ultra claro y fondo del teléfono)
+       Blanco Puro: #FFFFFF (Tarjetas de producto, modales, campos)
+       Texto y Jerarquía: #1F2937 (Títulos principales) / #6B7280 (Descripciones, tachados)
+       Verde de Conversión: #22C55E (Badges "Activo") / #25D366 (Botones WhatsApp)
+  -->
+  <style>
+    :root {
+      --primary: #7C3AED;
+      --primary-dark: #6D28D9;
+      --primary-light: #EDE9FE;
+      --primary-soft: #F5F3FF;
+      --orange: #F97316;
+      --orange-dark: #EA580C;
+      --orange-light: #FFF7ED;
+      --orange-soft: #FFEDD5;
+      --bg: #F9FAFB;
+      --surface: #FFFFFF;
+      --text-main: #1F2937;
+      --text-muted: #6B7280;
+      --green: #22C55E;
+      --green-light: #DCFCE7;
+      --green-whatsapp: #25D366;
+      --border: #E5E7EB;
+      --radius-sm: 8px;
+      --radius: 16px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(31, 41, 55, 0.05);
+      --shadow-md: 0 6px 16px -3px rgba(124, 58, 237, 0.1), 0 2px 6px -2px rgba(31, 41, 55, 0.04);
+      --shadow-lg: 0 16px 28px -8px rgba(124, 58, 237, 0.15), 0 6px 10px -3px rgba(31, 41, 55, 0.04);
+      --shadow-orange: 0 6px 16px -3px rgba(249, 115, 22, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ICONOS ESTILO IPHONE (SF SYMBOLS STYLE) */
+    .ios-icon {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .ios-icon-sm {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2;
+    }
+
+    .ios-icon-lg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2;
+    }
+
+    /* BARRA DE NAVEGACIÓN COMPACTA */
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.65rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--orange) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 1.2rem;
+      box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+
+    .brand-name span {
+      color: var(--orange);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    /* HERO COMPACTO (TODO VISIBLE EN PANTALLA 1) */
+    .hero {
+      background: radial-gradient(90% 70% at 50% 0%, #EDE9FE 0%, var(--bg) 85%);
+      padding: 2.5rem 1.5rem 2rem;
+      position: relative;
+    }
+
+    .hero-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background-color: var(--surface);
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .badge-dot-active {
+      width: 8px;
+      height: 8px;
+      background-color: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--green);
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+      color: var(--text-main);
+      margin-bottom: 0.85rem;
+    }
+
+    .highlight-purple {
+      color: var(--primary);
+    }
+
+    .highlight-orange {
+      color: var(--orange);
+    }
+
+    .hero-lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* BOTÓN OFICIAL GOOGLE PLAY STORE */
+    .btn-playstore-official {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background-color: #000000;
+      color: #FFFFFF;
+      padding: 0.55rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid #374151;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.15s;
+    }
+
+    .btn-playstore-official:hover {
+      background-color: #111827;
+      transform: translateY(-1px);
+    }
+
+    .playstore-logo-svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .playstore-btn-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .playstore-label {
+      font-size: 0.62rem;
+      color: #D1D5DB;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .playstore-brand {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.15;
+    }
+
+    /* BOTÓN HERO PRIMARIO EN NARANJA (#F97316) */
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background-color: var(--orange);
+      color: #FFFFFF;
+      padding: 0.65rem 1.35rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.92rem;
+      box-shadow: var(--shadow-orange);
+      transition: all 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-hero-primary:hover {
+      background-color: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    /* BOTÓN WHATSAPP EN VERDE (#25D366) */
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background-color: var(--green-whatsapp);
+      color: #FFFFFF;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+      transition: all 0.15s;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #20BA5A;
+      transform: translateY(-1px);
+    }
+
+    /* CHIPS DE MÉTRICAS COMPACTAS */
+    .hero-chips-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .hero-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-chip strong {
+      color: var(--text-main);
+    }
+
+    .hero-chip.purple strong {
+      color: var(--primary);
+    }
+
+    .hero-chip.orange strong {
+      color: var(--orange);
+    }
+
+    .hero-chip.green strong {
+      color: var(--green);
+    }
+
+    /* MOCKUP COMPACTO DE IPHONE */
+    .phone-mockup-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .phone-mockup {
+      width: 100%;
+      max-width: 325px;
+      background: var(--bg);
+      border-radius: 36px;
+      border: 8px solid #1F2937;
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-island-bar {
+      background: #1F2937;
+      padding: 0.45rem 1rem 0.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #FFFFFF;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .dynamic-island {
+      width: 75px;
+      height: 15px;
+      background: #000000;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+
+    .phone-header {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 0.85rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .phone-header-user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+    }
+
+    .phone-gps-pill {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .phone-body {
+      padding: 0.85rem;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .app-product-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 0.85rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .merma-alert-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--orange-light);
+      border: 1px solid var(--orange-soft);
+      color: var(--orange-dark);
+      padding: 0.35rem 0.65rem;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .merma-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--orange);
+    }
+
+    .qr-timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: #FFFFFF;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      color: var(--orange-dark);
+      font-weight: 800;
+    }
+
+    .product-img-box {
+      width: 100%;
+      height: 110px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 0.65rem;
+      background: #F3F4F6;
+    }
+
+    .product-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .discount-pill {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--orange);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      box-shadow: 0 2px 6px rgba(249, 115, 22, 0.4);
+    }
+
+    .status-badge-active {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--green-light);
+      color: #15803D;
+      border: 1px solid #BBF7D0;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .card-product-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.15rem;
+      line-height: 1.25;
+    }
+
+    .card-product-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .card-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .price-original-striked {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+
+    .price-discounted {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .price-savings {
+      font-size: 0.7rem;
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .card-actions-group {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .btn-apartar-oferta {
+      flex: 1;
+      background: var(--orange);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.55rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition: background 0.15s;
+      box-shadow: 0 3px 8px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-apartar-oferta:hover {
+      background: var(--orange-dark);
+    }
+
+    .btn-card-whatsapp {
+      background: var(--green-whatsapp);
+      color: #FFFFFF;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .phone-bottom-nav {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 0.35rem 0.65rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav-tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+    }
+
+    .nav-tab-item.active {
+      color: var(--primary);
+      font-weight: 800;
+      background: var(--primary-light);
+    }
+
+    /* SECCIÓN MODULAR BENTO GRID (MÁXIMA INFORMACIÓN, MÍNIMO SCROLL) */
+    .bento-section {
+      padding: 3.5rem 1.5rem;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .section-header-compact {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 2.25rem;
+    }
+
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .section-title {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+      margin-bottom: 0.45rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* BENTO GRID LAYOUT */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.25rem;
+    }
+
+    .bento-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #DDD6FE;
+    }
+
+    /* BENTO 1: PROBLEMÁTICA RESUELTA CON IMAGEN DE STOCK (COL 7) */
+    .bento-problem-card {
+      grid-column: span 7;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 0;
+    }
+
+    .bento-stock-img-box {
+      position: relative;
+      height: 100%;
+      min-height: 240px;
+    }
+
+    .bento-stock-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bento-stock-pill {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(31, 41, 55, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 0.75rem;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .bento-problem-content {
+      padding: 1.5rem 1.5rem 1.5rem 0.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bento-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--orange-dark);
+      background: var(--orange-light);
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+
+    .bento-problem-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.65rem;
+      line-height: 1.25;
+    }
+
+    .bento-comparison-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+    }
+
+    .bento-compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+    }
+
+    .bento-compare-item.bad {
+      color: #991B1B;
+    }
+
+    .bento-compare-item.good {
+      color: #15803D;
+      font-weight: 600;
+    }
+
+    /* BENTO 2: SENSI IA INTERACTIVO (COL 5) */
+    .bento-sensi-card {
+      grid-column: span 5;
+      background: radial-gradient(100% 100% at 50% 0%, #F5F3FF 0%, #FFFFFF 100%);
+      border: 1.5px solid #DDD6FE;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sensi-header-mini {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+
+    .sensi-badge-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+    }
+
+    .sensi-recipe-bubble {
+      background: #FFFFFF;
+      border: 1px solid #DDD6FE;
+      border-radius: 14px;
+      padding: 1rem;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1rem;
+      min-height: 95px;
+      line-height: 1.45;
+    }
+
+    .sensi-ingredients-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .ingredient-pill-mini {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.55rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .ingredient-pill-mini.discount {
+      border-color: var(--orange-soft);
+      background: var(--orange-light);
+      color: var(--orange-dark);
+    }
+
+    .sensi-btn-mini {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      transition: background 0.15s;
+      width: 100%;
+    }
+
+    .sensi-btn-mini:hover {
+      background: var(--primary-dark);
+    }
+
+    /* BENTO 3, 4, 5 (TRES COLUMNAS INFERIORES: COL 4 CADA UNA) */
+    .bento-feature-card {
+      grid-column: span 4;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bento-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .bento-icon-box.purple {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .bento-icon-box.orange {
+      background: var(--orange-light);
+      color: var(--orange);
+    }
+
+    .bento-icon-box.green {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .bento-card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+    }
+
+    .bento-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 1rem;
+    }
+
+    .bento-inline-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .bento-inline-btn.orange {
+      color: var(--orange);
+    }
+
+    .bento-inline-btn.orange:hover {
+      color: var(--orange-dark);
+    }
+
+    .bento-inline-btn.purple {
+      color: var(--primary);
+    }
+
+    .bento-inline-btn.purple:hover {
+      color: var(--primary-dark);
+    }
+
+    .bento-inline-btn.green {
+      color: var(--green-whatsapp);
+    }
+
+    /* TRES PASOS Y RESPALDO ACADÉMICO (COMPACTOS EN 1 FILA) */
+    .compact-flow-section {
+      padding: 3rem 1.5rem 3.5rem;
+      background: var(--bg);
+    }
+
+    .steps-row-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+
+    .step-item-mini {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+
+    .step-num-pill {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 900;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-text-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.2rem;
+    }
+
+    .step-text-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* RESPALDO ACADÉMICO COMPACTO EN 1 SOLA BARRA */
+    .academic-trust-bar {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .trust-team-chips {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .team-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .team-chip-avatar {
+      width: 20px;
+      height: 20px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .academic-uttt-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.82rem;
+      background: var(--primary-soft);
+      padding: 0.35rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--primary-light);
+    }
+
+    /* MODAL DE APARTADO CON QR (DEMO INTERACTIVO EN BLANCO PURO) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(31, 41, 55, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      border-radius: 20px;
+      max-width: 380px;
+      width: 100%;
+      padding: 1.75rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      animation: modalPop 0.2s ease-out;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.94); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: #F3F4F6;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .qr-box-demo {
+      width: 160px;
+      height: 160px;
+      margin: 1rem auto;
+      background: #FFFFFF;
+      border: 3px dashed var(--orange);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    /* FOOTER COMPACTO */
+    footer {
+      background-color: #111827;
+      color: #9CA3AF;
+      padding: 2.5rem 1.5rem 1.75rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #1F2937;
+    }
+
+    .footer-brand h3 {
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links-row a {
+      color: #9CA3AF;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links-row a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      max-width: 1140px;
+      margin: 1rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+    }
+
+    .footer-bottom a {
+      color: #CBD5E1;
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .hero-chips-strip {
+        justify-content: center;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-problem-card {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+      }
+      .bento-stock-img-box {
+        min-height: 200px;
+      }
+      .bento-problem-content {
+        padding: 1.25rem;
+      }
+      .bento-sensi-card, .bento-feature-card {
+        grid-column: span 1;
+      }
+      .steps-row-card {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.15rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .academic-trust-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN COMPACTA -->
+  <nav>
+    <div class="nav-container">
+      <a href="https://rodnix.com.mx/sensus/" class="brand">
+        <div class="brand-logo">S</div>
+        <div class="brand-name">Sensus<span>.</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#bento" class="nav-link">¿Por qué Sensus?</a>
+        <a href="#bento" class="nav-link">Funciones</a>
+        <a href="#sensi-demo" class="nav-link">Sensi IA</a>
+        <a href="#como-funciona" class="nav-link">¿Cómo Funciona?</a>
+        <a href="privacidad.html" class="nav-link">Privacidad</a>
+        <a href="eliminar-cuenta.html" class="nav-link">Eliminar Cuenta</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PANTALLA 1: HERO COMPACTO + SHOWCASE DE IPHONE (TODO INMEDIATO ARRIBA) -->
+  <header class="hero">
+    <div class="hero-container">
+      
+      <!-- COLUMNA IZQUIERDA: VALOR INMEDIATO Y ACCIÓN -->
+      <div>
+        <div class="badge-pill">
+          <span class="badge-dot-active"></span>
+          <span>Versión 1.1 en Pruebas Cerradas • UTTT 10IDGS-G2</span>
+        </div>
+        
+        <h1>
+          Ahorro inteligente y <br>
+          <span class="highlight-purple">cero mermas</span> <span class="highlight-orange">cerca de ti</span>
+        </h1>
+        
+        <p class="hero-lead">
+          <strong>Sensus</strong> centraliza en una sola app las mejores ofertas de supermercados y tiendas locales en México. Aparta con QR, explora a 2 km y cocina con <strong>Sensi IA</strong>.
+        </p>
+
+        <!-- BOTONES DE CONVERSIÓN RÁPIDA -->
+        <div class="hero-buttons">
+          <!-- BOTÓN OFICIAL GOOGLE PLAY STORE CON COLORES REALES -->
+          <a href="https://play.google.com/store/apps/details?id=sensus.com" class="btn-playstore-official" target="_blank" rel="noopener">
+            <svg class="playstore-logo-svg" viewBox="0 0 512 512">
+              <path fill="#00C3FF" d="M48.2 16.7C34.6 24 25.6 38.8 25.6 56.4v399.2c0 17.6 9 32.4 22.6 39.7l217.4-219.7L48.2 16.7z"/>
+              <path fill="#FF3A44" d="M338.3 328.7l-72.7-53.1-217.4 219.7c7.4 3.7 16.2 4.4 25.2-0.8l264.9-165.8z"/>
+              <path fill="#FFC800" d="M410.8 238.4l-72.5 45.4-72.7-53.1 72.7-53.1 72.5 45.4c16.2 10.1 16.2 26.6 0 36.7l-0.0-0.0z"/>
+              <path fill="#00E676" d="M73.7 32.8C64.7 27.6 55.9 28.3 48.5 32l217.1 219.4 72.7-53.1-264.6-165.5z"/>
+            </svg>
+            <div class="playstore-btn-text">
+              <span class="playstore-label">Disponible en</span>
+              <span class="playstore-brand">Google Play</span>
+            </div>
+          </a>
+
+          <!-- BOTÓN DEMO DE APARTADO EN NARANJA (#F97316) -->
+          <button type="button" class="btn-hero-primary" onclick="openQrDemo();">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Apartar Oferta (Demo)</span>
+          </button>
+
+          <!-- BOTÓN WHATSAPP EN VERDE (#25D366) -->
+          <a href="https://api.whatsapp.com/send?text=¡Mira%20esta%20app%20para%20ahorrar%20en%20supermercados%20y%20reducir%20mermas!%20https://rodnix.com.mx/sensus/" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.05 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- STRIP DE MÉTRICAS COMPACTAS -->
+        <div class="hero-chips-strip">
+          <div class="hero-chip purple">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span><strong>2 km</strong> Radar Libre</span>
+          </div>
+          <div class="hero-chip orange">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span><strong>-50%</strong> Merma Cero</span>
+          </div>
+          <div class="hero-chip green">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span><strong>100%</strong> Calidad</span>
+          </div>
+          <div class="hero-chip purple">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M12 3l1.8 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.9 1.8a2 2 0 0 0-1.3 1.3L12 21l-1.8-5.9a2 2 0 0 0-1.3-1.3L3 12l5.9-1.8a2 2 0 0 0 1.3-1.3L12 3z"/></svg>
+            <span><strong>Sensi IA</strong> Recetas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: INTERFAZ MÓVIL COMPACTA -->
+      <div class="phone-mockup-wrapper">
+        <div class="phone-mockup">
+          
+          <!-- BARRA ESTILO IPHONE CON DYNAMIC ISLAND -->
+          <div class="phone-island-bar">
+            <span>9:41</span>
+            <div class="dynamic-island"></div>
+            <div style="display:flex; align-items:center; gap: 4px;">
+              <svg width="13" height="9" viewBox="0 0 16 12" fill="currentColor"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/></svg>
+            </div>
+          </div>
+          
+          <!-- HEADER MORADO PRIMARIO (#7C3AED) -->
+          <div class="phone-header">
+            <div class="phone-header-user">
+              <div class="user-avatar">RS</div>
+              <div>
+                <div style="font-size: 0.82rem; font-weight: 800;">Hola, Rodrigo</div>
+                <div style="font-size: 0.68rem; opacity: 0.85;">Ahorro: $340 MXN</div>
+              </div>
+            </div>
+            <div class="phone-gps-pill">
+              <svg class="ios-icon" style="width:11px; height:11px;" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>2 km activo</span>
+            </div>
+          </div>
+
+          <!-- CONTENIDO DEL TELÉFONO -->
+          <div class="phone-body">
+            
+            <div class="app-product-card">
+              <!-- ALERTA MERMA CERO EN NARANJA (#F97316) -->
+              <div class="merma-alert-banner">
+                <span class="merma-badge">
+                  <svg class="ios-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Merma Cero</span>
+                </span>
+                <span class="qr-timer" id="phoneTimer">
+                  <svg class="ios-icon" style="width:11px; height:11px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>QR: 04:59</span>
+                </span>
+              </div>
+
+              <!-- FOTO REAL DE PRODUCTO FRESCO -->
+              <div class="product-img-box">
+                <img src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=600&q=80" alt="Pechuga de pollo fresca en oferta">
+                <div class="discount-pill">-50%</div>
+                <div class="status-badge-active">
+                  <span class="badge-dot-active" style="width:6px; height:6px;"></span>
+                  <span>Activo</span>
+                </div>
+              </div>
+
+              <h4 class="card-product-title">Pechuga de Pollo Fresca 1kg</h4>
+              <div class="card-product-meta">
+                <svg class="ios-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Supermercado La Huerta • 420m</span>
+              </div>
+
+              <div class="card-price-row">
+                <span class="price-original-striked">$160 MXN</span>
+                <span class="price-discounted">$80 MXN</span>
+                <span class="price-savings">Ahorro 50%</span>
+              </div>
+
+              <div class="card-actions-group">
+                <button type="button" class="btn-apartar-oferta" onclick="openQrDemo();">
+                  <svg class="ios-icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  <span>Apartar Oferta</span>
+                </button>
+                <a href="https://api.whatsapp.com/send?text=¡Encontré%20esta%20oferta%20en%20Sensus!%20Pechuga%20al%2050%%20https://rodnix.com.mx/sensus/" target="_blank" rel="noopener" class="btn-card-whatsapp" title="WhatsApp">
+                  <svg class="ios-icon" style="width:16px; height:16px;" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.05 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- MENÚ INFERIOR CON ESTADO ACTIVO EN MORADO (#7C3AED) -->
+          <div class="phone-bottom-nav">
+            <a href="javascript:void(0)" class="nav-tab-item active">
+              <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Explorar</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-tab-item">
+              <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <span>Ofertas</span>
+            </a>
+            <a href="#sensi-demo" class="nav-tab-item">
+              <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M12 3l1.8 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.9 1.8a2 2 0 0 0-1.3 1.3L12 21l-1.8-5.9a2 2 0 0 0-1.3-1.3L3 12l5.9-1.8a2 2 0 0 0 1.3-1.3L12 3z"/></svg>
+              <span>Sensi IA</span>
+            </a>
+            <a href="javascript:void(0)" class="nav-tab-item">
+              <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M16 12h4"/><circle cx="16" cy="12" r="1"/></svg>
+              <span>Billetera</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- PANTALLA 2: BENTO GRID MODULAR (MÁXIMA INFORMACIÓN SIN SCROLL ETERNO) -->
+  <section id="bento" class="bento-section">
+    <div class="section-container">
+      
+      <div class="section-header-compact">
+        <div class="section-tag">Todo en una sola vista</div>
+        <h2 class="section-title">El poder de Sensus sin complicaciones</h2>
+        <p class="section-subtitle">
+          De folletos y vueltas a ciegas a tu despensa en un toque.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        
+        <!-- BENTO 1: PROBLEMÁTICA VS SOLUCIÓN CON FOTO DE STOCK (COL 7) -->
+        <div class="bento-card bento-problem-card">
+          <div class="bento-stock-img-box">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Supermercado productos frescos">
+            <div class="bento-stock-pill">
+              <svg class="ios-icon ios-icon-sm" style="color: var(--green);" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Ahorro promedio familiar: 48%</span>
+            </div>
+          </div>
+          
+          <div class="bento-problem-content">
+            <span class="bento-tag-pill">
+              <svg class="ios-icon" style="width:13px; height:13px;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Lo que te facilita
+            </span>
+            <h3 class="bento-problem-title">Adiós a comparar precios a ciegas</h3>
+            <ul class="bento-comparison-list">
+              <li class="bento-compare-item bad">
+                <span>✕</span>
+                <span>Folletos impresos desactualizados y filas.</span>
+              </li>
+              <li class="bento-compare-item good">
+                <span>✓</span>
+                <span>Radar a 2 km con descuentos en tiempo real.</span>
+              </li>
+              <li class="bento-compare-item good">
+                <span>✓</span>
+                <span>Apartas con QR y aseguras el precio en caja.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BENTO 2: SENSI IA INTERACTIVO (COL 5) -->
+        <div class="bento-card bento-sensi-card" id="sensi-demo">
+          <div>
+            <div class="sensi-header-mini">
+              <div class="sensi-badge-mini">
+                <svg class="ios-icon" style="width:13px; height:13px;" viewBox="0 0 24 24"><path d="M12 3l1.8 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.9 1.8a2 2 0 0 0-1.3 1.3L12 21l-1.8-5.9a2 2 0 0 0-1.3-1.3L3 12l5.9-1.8a2 2 0 0 0 1.3-1.3L12 3z"/></svg>
+                <span>Sensi IA Culinaria</span>
+              </div>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;">Machine Learning</span>
+            </div>
+
+            <div class="sensi-recipe-bubble" id="sensiRecipeText">
+              "Detecté pechuga al <strong>-50%</strong> y pimientos en Supermercado La Huerta. Prepara <strong>Fajitas Supremas al Sartén</strong> para 4 personas por sólo <strong>$95 MXN</strong>."
+            </div>
+
+            <div class="sensi-ingredients-row">
+              <span class="ingredient-pill-mini discount">Pechuga (-50%)</span>
+              <span class="ingredient-pill-mini discount">Pimientos (-40%)</span>
+              <span class="ingredient-pill-mini">Cebolla</span>
+              <span class="ingredient-pill-mini">Limón</span>
+            </div>
+          </div>
+
+          <button type="button" class="sensi-btn-mini" onclick="generateRecipeDemo();">
+            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M12 3l1.8 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.9 1.8a2 2 0 0 0-1.3 1.3L12 21l-1.8-5.9a2 2 0 0 0-1.3-1.3L3 12l5.9-1.8a2 2 0 0 0 1.3-1.3L12 3z"/></svg>
+            <span>Generar otra receta con ofertas</span>
+          </button>
+        </div>
+
+        <!-- BENTO 3: RADAR GPS (COL 4) -->
+        <div class="bento-card bento-feature-card">
+          <div>
+            <div class="bento-icon-box purple">
+              <svg class="ios-icon ios-icon-lg" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3 class="bento-card-title">Radar GPS a 2 km</h3>
+            <p class="bento-card-desc">
+              Explora supermercados y tiendas afiliadas a tu alrededor en modo libre. Total privacidad en primer plano sin registros forzosos.
+            </p>
+          </div>
+          <span style="font-size: 0.78rem; font-weight: 800; color: var(--primary);">✓ Sin crear cuenta</span>
+        </div>
+
+        <!-- BENTO 4: APARTADO CON QR (COL 4) -->
+        <div class="bento-card bento-feature-card">
+          <div>
+            <div class="bento-icon-box orange">
+              <svg class="ios-icon ios-icon-lg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3 class="bento-card-title">Apartado Inmediato QR</h3>
+            <p class="bento-card-desc">
+              Bloquea tu precio exclusivo con un temporizador dinámico. Muestra el código en caja y valida tu descuento sin pagos por adelantado.
+            </p>
+          </div>
+          <button type="button" class="bento-inline-btn orange" onclick="openQrDemo();">
+            <span>Ver demo de código QR →</span>
+          </button>
+        </div>
+
+        <!-- BENTO 5: MERMA CERO & COMUNIDAD (COL 4) -->
+        <div class="bento-card bento-feature-card">
+          <div>
+            <div class="bento-icon-box green">
+              <svg class="ios-icon ios-icon-lg" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-4 3.5-7.5 8-9 4.5 1.5 8 5 8 9a7 7 0 0 1-7 7z"/><path d="M12 4v16"/></svg>
+            </div>
+            <h3 class="bento-card-title">Merma Cero & WhatsApp</h3>
+            <p class="bento-card-desc">
+              Rescata alimentos en perfecto estado a precios de liquidación y comparte gangas directo con tus amigos por WhatsApp.
+            </p>
+          </div>
+          <a href="https://api.whatsapp.com/send?text=¡Mira%20esta%20app%20para%20ahorrar!%20https://rodnix.com.mx/sensus/" target="_blank" rel="noopener" class="bento-inline-btn green">
+            <span>Compartir por WhatsApp →</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PANTALLA 3: FLUJO EN 3 PASOS + RESPALDO ACADÉMICO EN 1 BARRA -->
+  <section id="como-funciona" class="compact-flow-section">
+    <div class="section-container">
+      
+      <!-- FLUJO EN 3 PASOS (1 SOLA FILA COMPACTA) -->
+      <div class="steps-row-card">
+        <div class="step-item-mini">
+          <div class="step-num-pill">1</div>
+          <div>
+            <div class="step-text-title">Explora a 2 km</div>
+            <div class="step-text-desc">Abre la app y localiza ofertas con hasta 50% de descuento sin registrarte.</div>
+          </div>
+        </div>
+
+        <div class="step-item-mini">
+          <div class="step-num-pill" style="background: var(--orange-light); color: var(--orange-dark);">2</div>
+          <div>
+            <div class="step-text-title">Aparta con QR</div>
+            <div class="step-text-desc">Toca "Apartar Oferta" para generar tu código con temporizador de apartado.</div>
+          </div>
+        </div>
+
+        <div class="step-item-mini">
+          <div class="step-num-pill" style="background: var(--green-light); color: #15803D;">3</div>
+          <div>
+            <div class="step-text-title">Canjea y Cocina</div>
+            <div class="step-text-desc">Muestra en caja, valida el precio y cocina deliciosas recetas con Sensi IA.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA DE RESPALDO ACADÉMICO UTTT (COMPACTA) -->
+      <div class="academic-trust-bar">
+        <div class="trust-team-chips">
+          <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Equipo:</span>
+          <div class="team-chip">
+            <span class="team-chip-avatar">RS</span>
+            <span>Rodrigo Sánchez Cruz</span>
+          </div>
+          <div class="team-chip">
+            <span class="team-chip-avatar">AC</span>
+            <span>Alberto Cruz</span>
+          </div>
+          <div class="team-chip">
+            <span class="team-chip-avatar">OS</span>
+            <span>Óscar Salinas</span>
+          </div>
+          <div class="team-chip">
+            <span class="team-chip-avatar">RC</span>
+            <span>Rocío Cruz</span>
+          </div>
+        </div>
+
+        <div class="academic-uttt-tag">
+          <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>UTTT • 10IDGS-G2</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL DE APARTADO CON QR (DEMO INTERACTIVO EN BLANCO PURO) -->
+  <div class="modal-overlay" id="qrModal" onclick="closeQrModalOnOutside(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeQrModal();" title="Cerrar modal">
+        <svg class="ios-icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      
+      <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: var(--green-light); color: #15803D; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; margin-bottom: 0.75rem;">
+        <span class="badge-dot-active" style="width:6px; height:6px;"></span>
+        <span>Oferta Apartada con Éxito</span>
+      </div>
+
+      <h3 style="font-size: 1.2rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.2rem;">
+        Pechuga de Pollo Fresca 1kg
+      </h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+        Supermercado La Huerta • Precio: <strong>$80.00 MXN</strong> (-50%)
+      </p>
+
+      <div class="qr-box-demo">
+        <svg viewBox="0 0 100 100" width="90" height="90" fill="#1F2937">
+          <rect x="10" y="10" width="25" height="25" fill="#1F2937"/>
+          <rect x="15" y="15" width="15" height="15" fill="#FFFFFF"/>
+          <rect x="18" y="18" width="9" height="9" fill="#1F2937"/>
+          <rect x="65" y="10" width="25" height="25" fill="#1F2937"/>
+          <rect x="70" y="15" width="15" height="15" fill="#FFFFFF"/>
+          <rect x="73" y="18" width="9" height="9" fill="#1F2937"/>
+          <rect x="10" y="65" width="25" height="25" fill="#1F2937"/>
+          <rect x="15" y="70" width="15" height="15" fill="#FFFFFF"/>
+          <rect x="18" y="73" width="9" height="9" fill="#1F2937"/>
+          <rect x="42" y="15" width="16" height="8" fill="#F97316"/>
+          <rect x="45" y="42" width="12" height="12" fill="#7C3AED"/>
+          <rect x="65" y="45" width="20" height="10" fill="#1F2937"/>
+          <rect x="42" y="65" width="16" height="25" fill="#1F2937"/>
+          <rect x="68" y="68" width="18" height="18" fill="#F97316"/>
+        </svg>
+        <span style="font-size: 0.68rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.05em;">CÓDIGO: SEN-84920</span>
+      </div>
+
+      <div style="background: var(--orange-light); border: 1px solid var(--orange-soft); color: var(--orange-dark); padding: 0.4rem 0.75rem; border-radius: 8px; font-size: 0.82rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+        <svg class="ios-icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Expira en: <span id="modalCountdown">04:59</span></span>
+      </div>
+
+      <button type="button" class="btn-hero-primary" style="width: 100%; justify-content: center;" onclick="closeQrModal();">
+        <span>Entendido, Volver</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER COMPACTO -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>Sensus App</h3>
+        <p style="font-size: 0.82rem; max-width: 320px; line-height: 1.4;">
+          Ahorro inteligente y reducción de mermas en supermercados locales con geolocalización e IA.
+        </p>
+      </div>
+
+      <ul class="footer-links-row">
+        <li><a href="privacidad.html">Privacidad</a></li>
+        <li><a href="eliminar-cuenta.html">Eliminar Cuenta</a></li>
+        <li><a href="privacidad.html#permisos">Permisos GPS</a></li>
+        <li><a href="mailto:sanxcruro122@gmail.com">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Sensus Team • Universidad Tecnológica de Tula-Tepeji.</div>
+      <div>Alojado en <a href="https://rodnix.com.mx" target="_blank">rodnix.com.mx</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Temporizador de QR dinámico
+    var totalSeconds = 299;
+    setInterval(function() {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds % 60;
+        var formatted = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        var phoneEl = document.getElementById("phoneTimer");
+        var modalEl = document.getElementById("modalCountdown");
+        if (phoneEl) {
+          phoneEl.innerHTML = '<svg class="ios-icon" style="width:11px; height:11px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> QR: ' + formatted;
+        }
+        if (modalEl) modalEl.textContent = formatted;
+      }
+    }, 1000);
+
+    function openQrDemo() {
+      var modal = document.getElementById("qrModal");
+      if (modal) modal.classList.add("active");
+    }
+
+    function closeQrModal() {
+      var modal = document.getElementById("qrModal");
+      if (modal) modal.classList.remove("active");
+    }
+
+    function closeQrModalOnOutside(e) {
+      if (e.target.id === "qrModal") {
+        closeQrModal();
+      }
+    }
+
+    var recipesList = [
+      "\"Detecté pechuga al <strong>-50%</strong> y pimientos en Supermercado La Huerta. Prepara <strong>Fajitas Supremas al Sartén</strong> para 4 personas por sólo <strong>$95 MXN</strong>.\"",
+      "\"Con el pollo en oferta y jitomates maduros de la verdulería vecina, prepara un <strong>Caldillo Ranchero</strong> en 25 min. Ahorro estimado: <strong>55%</strong>.\"",
+      "\"Aprovecha la pechuga de pollo al 50% con arroz y verduras salteadas. Menú nutritivo balanceado por sólo <strong>$120 MXN</strong>.\""
+    ];
+    var currentRecipeIdx = 0;
+
+    function generateRecipeDemo() {
+      currentRecipeIdx = (currentRecipeIdx + 1) % recipesList.length;
+      var textEl = document.getElementById("sensiRecipeText");
+      if (textEl) {
+        textEl.style.opacity = '0.3';
+        setTimeout(function() {
+          textEl.innerHTML = recipesList[currentRecipeIdx];
+          textEl.style.opacity = '1';
+        }, 120);
+      }
+    }
+  </script>
+</body>
+</html>

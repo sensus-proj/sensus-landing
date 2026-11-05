@@ -1,0 +1,49 @@
+name: DevSecOps Security Audit
+
+on:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 4 * * 1' # Cada lunes a las 04:00 UTC
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    name: 🛡️ Análisis Estático y Auditoría
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔒 Gitleaks Secret Scanner
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🟢 Configurar Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'app-vite-sensus/package-lock.json'
+
+      - name: 📦 Auditoría de Dependencias (SCA)
+        working-directory: ./app-vite-sensus
+        run: |
+          npm ci
+          npm audit --audit-level=high
+
+      - name: 📱 Validar sintaxis .well-known/assetlinks.json
+        run: |
+          python3 -c "
+          import json
+          with open('public/.well-known/assetlinks.json') as f:
+              data = json.load(f)
+              assert len(data) > 0, 'assetlinks.json está vacío'
+              target = data[0].get('target', {})
+              assert target.get('package_name') == 'sensus.com', 'Package name inválido'
+          print('✅ assetlinks.json syntactically valid')
+          "

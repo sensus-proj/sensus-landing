@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "sensus.com",
+      "sha256_cert_fingerprints": [
+        "85:45:30:3E:F9:F5:A1:04:BE:8C:37:2A:B4:A9:BB:0A:9F:70:6F:76:D2:E9:E1:A6:86:24:DF:62:FE:92:9C:73"
+      ]
+    }
+  }
+]

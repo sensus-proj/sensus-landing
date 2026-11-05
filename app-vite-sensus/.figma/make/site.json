@@ -1,0 +1,11 @@
+{
+  "title": "Sensus",
+  "description": "Create engaging typing effects with a blinking cursor that reveals text character by character, perfect for enhancing websites and presentations.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
