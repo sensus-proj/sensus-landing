@@ -45,9 +45,26 @@ flowchart TD
 * **El Problema:** Google Play exige que la URL de **Aviso de Privacidad** (`privacidad.html`) y la de **Eliminación de Cuenta** (`eliminar-cuenta.html`) estén 100% disponibles. Si la landing se rompe o da error 404, **Google suspende la app en la tienda**.
 * **DevSecOps:** Un test en el pipeline que compruebe que estas rutas devuelven HTTP 200 y contienen las etiquetas mínimas requeridas.
 
-#### B. Validación de `assetlinks.json` (Android App Links)
-* **El Problema:** El archivo `https://tudominio.com/.well-known/assetlinks.json` le dice a Android que abra los enlaces (`reset password`, ofertas) directamente en la app nativa y no en el navegador. Si alguien rompe el JSON o cambia el SHA-256, se rompen los deep links en los teléfonos de los usuarios.
-* **DevSecOps:** Un script de verificación de formato JSON y huella digital SHA-256 en CI.
+#### B. Validación y Gobernanza de `assetlinks.json` (Android App Links & SSO)
+* **El Problema:** El archivo `https://tudominio.com/.well-known/assetlinks.json` define qué aplicaciones nativas de Android están criptográficamente autorizadas para interactuar con tu dominio web. Si alguien corrompe el JSON, altera el SHA-256 o asigna permisos indebidos, se rompen los enlaces profundos o se pueden exponer credenciales ante apps maliciosas.
+
+##### 1. Los Dos Permisos (`relation`) Autorizados
+Al analizar gigantes de la industria como Facebook/Meta, se identifican dos tipos fundamentales de relaciones:
+* **A. `"delegate_permission/common.handle_all_urls"` (Deep Linking Universal):**
+  Le indica a Android: *"Si el usuario hace clic en una URL de este dominio (como un enlace de recuperación de contraseña o una oferta), ábrelo automáticamente dentro de la app nativa autorizada sin pasar por el navegador"*.
+* **B. `"delegate_permission/common.get_login_creds"` (Compartir Contraseñas / SSO):**
+  Es el protocolo de **Google Password Manager / Smart Lock**:
+  Permite que si el usuario guardó su contraseña en Google Chrome en su computadora o navegador web, su teléfono Android pueda **autocompletar de forma segura esa misma credencial dentro de la app móvil**. Además, permite iniciar sesión con un solo clic entre aplicaciones autorizadas del mismo ecosistema sin necesidad de reescribir contraseñas.
+
+##### 2. Mejores Prácticas de DevSecOps para Digital Asset Links
+* **Principio de Menor Privilegio (PoLP):** Solo delegar permisos a `package_name` oficiales y autenticados. Jamás delegar `get_login_creds` a dominios o aplicaciones externas que no pertenezcan al perímetro de confianza de la organización.
+* **Integridad Criptográfica de Firmas SHA-256:** Las huellas deben provenir estrictamente del almacén de claves de producción (*Keystore*) o de *Google Play App Signing*. Las claves de desarrollo o depuración (*debug.keystore*) NUNCA deben publicarse en el pipeline de producción.
+* **Compuerta Bloqueante en CI/CD:** El pipeline verifica automáticamente mediante scripts en Python que:
+  1. El archivo JSON esté bien formado y no contenga sintaxis corrupta.
+  2. Cada entrada contenga una relación válida (`handle_all_urls` / `get_login_creds`).
+  3. El `target` contenga el espacio de nombres `android_app` y el `package_name` oficial (`sensus.com`).
+  4. La lista `sha256_cert_fingerprints` contenga únicamente huellas SHA-256 formadas por 32 pares hexadecimales en mayúsculas.
+* **Fail-Closed:** Si la validación falla en cualquier punto, el despliegue a producción se cancela de inmediato para evitar que una configuración inválida llegue al servidor.
 
 #### C. Cabeceras de Seguridad Web (Security Headers)
 * Auditoría de cabeceras en `.htaccess` o Nginx:
