@@ -2,714 +2,132 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Política de Privacidad | Sensus App</title>
-  <meta name="description" content="Aviso y Política de Privacidad Integral de la aplicación móvil Sensus. Conoce cómo protegemos tus datos, geolocalización, recomendaciones de Machine Learning y gestión de cuentas.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Privacidad | Sensus</title>
+  <meta name="description" content="Cuidamos tus datos y te explicamos de forma clara qué hacemos con ellos. Aviso de Privacidad Integral de Sensus.">
   <link rel="canonical" href="https://rodnix.com.mx/sensus/privacidad.html">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#7C3AED">
 
-  <style>
-    :root {
-      --primary: #7C3AED;
-      --primary-dark: #6D28D9;
-      --primary-light: #EDE9FE;
-      --primary-soft: #F5F3FF;
-      --orange: #F97316;
-      --orange-light: #FFF7ED;
-      --green: #22C55E;
-      --green-light: #DCFCE7;
-      --green-whatsapp: #25D366;
-      --bg: #F9FAFB;
-      --surface: #FFFFFF;
-      --text-main: #1F2937;
-      --text-body: #1F2937;
-      --text-muted: #6B7280;
-      --border: #E5E7EB;
-      --shadow-sm: 0 1px 3px rgba(31, 41, 55, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(31, 41, 55, 0.08), 0 2px 4px -2px rgba(31, 41, 55, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(31, 41, 55, 0.08), 0 4px 6px -4px rgba(31, 41, 55, 0.04);
-      --radius: 14px;
-    }
+  <link rel="icon" type="image/png" href="assets/logo.png">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text-body);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .ios-icon {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      display: inline-block;
-      vertical-align: middle;
-      flex-shrink: 0;
-    }
-
-    /* HEADER */
-    header {
-      background: linear-gradient(135deg, #5B21B6 0%, #7C3AED 50%, #9333EA 100%);
-      color: #FFFFFF;
-      padding: 3.5rem 1.5rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: "";
-      position: absolute;
-      top: -30%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(249, 115, 22, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .header-container {
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(8px);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      margin-bottom: 1.25rem;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
-
-    .subtitle {
-      font-size: 1.15rem;
-      color: #E9D5FF;
-      max-width: 720px;
-      margin-bottom: 1.5rem;
-    }
-
-    .meta-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.85);
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      padding-top: 1.25rem;
-    }
-
-    .meta-item strong {
-      color: #FFFFFF;
-    }
-
-    /* SUMMARY CARDS */
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
-      margin-top: -2rem;
-      margin-bottom: 2.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .summary-card {
-      background: var(--surface);
-      padding: 1.25rem 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--primary);
-    }
-
-    .summary-card.accent-orange {
-      border-top-color: var(--orange);
-    }
-
-    .summary-card.accent-green {
-      border-top-color: var(--green);
-    }
-
-    .summary-card h3 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .summary-card p {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    /* MAIN CONTAINER */
-    .main-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
-    }
-
-    .content-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border);
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-    }
-
-    /* TYPOGRAPHY */
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--primary-light);
-    }
-
-    h2:first-of-type {
-      margin-top: 0;
-    }
-
-    .section-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background-color: var(--primary-light);
-      color: var(--primary);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 800;
-    }
-
-    h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-top: 1.25rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin-bottom: 1rem;
-    }
-
-    ul, ol {
-      margin-bottom: 1.25rem;
-      padding-left: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    strong {
-      color: var(--text-main);
-    }
-
-    /* CALLOUT BOXES */
-    .callout {
-      background-color: var(--primary-soft);
-      border-left: 4px solid var(--primary);
-      padding: 1.15rem 1.35rem;
-      border-radius: 8px;
-      margin: 1.25rem 0;
-    }
-
-    .callout-title {
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 0.35rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .callout-orange {
-      background-color: var(--orange-light);
-      border-left-color: var(--orange);
-    }
-
-    .callout-orange .callout-title {
-      color: #C2410C;
-    }
-
-    .callout-green {
-      background-color: var(--green-light);
-      border-left-color: var(--green);
-    }
-
-    .callout-green .callout-title {
-      color: #047857;
-    }
-
-    /* TEAM PILLS */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin: 1rem 0 1.5rem;
-    }
-
-    .team-member {
-      background-color: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.85rem 1rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .team-member .name {
-      font-weight: 700;
-      color: var(--text-main);
-      font-size: 0.95rem;
-    }
-
-    .team-member .role {
-      font-size: 0.85rem;
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* TABLE */
-    .data-table-wrapper {
-      overflow-x: auto;
-      margin: 1.25rem 0 1.5rem;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.92rem;
-      background: var(--surface);
-    }
-
-    th {
-      background-color: var(--primary-soft);
-      color: var(--primary-dark);
-      text-align: left;
-      padding: 0.85rem 1rem;
-      font-weight: 700;
-      border-bottom: 2px solid var(--border);
-    }
-
-    td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    /* BUTTONS / CONTACT */
-    .contact-box {
-      background: linear-gradient(135deg, #EDE9FE 0%, #F5F3FF 100%);
-      border: 1px solid #DDD6FE;
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-    }
-
-    .contact-email {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .contact-email:hover {
-      text-decoration: underline;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 640px) {
-      header {
-        padding: 2.5rem 1rem 3rem;
-      }
-      h1 {
-        font-size: 1.85rem;
-      }
-      .content-card {
-        padding: 1.5rem;
-      }
-      .meta-bar {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="page-privacidad">
 
-  <!-- ENCABEZADO PRINCIPAL -->
-  <header>
-    <div class="header-container">
-      <div class="badge-pill">
-        <span class="badge-dot"></span>
-        Política de Privacidad Oficial • Sensus
-      </div>
-      <h1>Aviso de Privacidad Integral</h1>
-      <p class="subtitle">
-        Transparencia y protección de tus datos personales, geolocalización, recomendaciones mediante Machine Learning y comunidad colaborativa de ahorro.
-      </p>
-
-      <div class="meta-bar">
-        <div class="meta-item">
-          <strong>Aplicación:</strong> Sensus (Android App)
-        </div>
-        <div class="meta-item">
-          <strong>Identificador:</strong> sensus.com
-        </div>
-        <div class="meta-item">
-          <strong>Última actualización:</strong> Octubre 2026
-        </div>
-        <div class="meta-item">
-          <strong>Cumplimiento:</strong> Google Play Store Policy & LFPDPPP (México)
-        </div>
-      </div>
+  <div class="page-wrapper">
+    <!-- partial:header:start -->
+<header class="top-nav">
+  <div class="container">
+    <div class="top-nav-inner">
+      <a href="index.html" class="brand-clean" aria-label="Sensus Inicio">
+        <img src="assets/logo.png" alt="Sensus" class="brand-logo-img" width="36" height="36" loading="eager">
+        <span class="brand-title">Sensus</span>
+      </a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="main-wrapper">
+<!-- partial:header:end -->
 
-    <!-- TARJETAS DE RESUMEN EJECUTIVO -->
-    <div class="summary-grid">
-      <div class="summary-card">
-        <h3>Responsables</h3>
-        <p>Sensus Team / UTTT</p>
-      </div>
-      <div class="summary-card accent-orange">
-        <h3>Ubicación GPS</h3>
-        <p>Solo en Primer Plano</p>
-      </div>
-      <div class="summary-card accent-green">
-        <h3>Venta de Datos</h3>
-        <p>No comercializamos datos</p>
-      </div>
-      <div class="summary-card">
-        <h3>Contacto</h3>
-        <p>sanxcruro122@gmail.com</p>
-      </div>
+    <div class="bg-scene" aria-hidden="true">
+      <div class="bg-scene__blob bg-scene__blob--orange"></div>
+      <div class="bg-scene__blob bg-scene__blob--green"></div>
+      <div class="bg-scene__blob bg-scene__blob--violet"></div>
+      <div class="bg-scene__blob bg-scene__blob--red"></div>
     </div>
 
-    <div class="content-card">
+    <main class="page-main">
+      <div class="container">
+        <header class="page-header-clean">
+          <h1 class="page-header-title">Privacidad</h1>
+          <p class="page-header-subtitle">
+            Cuidamos tus datos y te explicamos de forma clara qué hacemos con ellos.
+          </p>
+        </header>
 
-      <!-- SECCIÓN 1: RESPONSABLES -->
-      <h2><span class="section-num">1</span> Identidad y Responsables del Tratamiento</h2>
-      <p>
-        El presente Aviso de Privacidad Integral se emite para la aplicación móvil <strong>Sensus</strong>, proyecto desarrollado por el equipo <strong>Sensus Team</strong> perteneciente a la carrera de <strong>Ingeniería en Desarrollo y Gestión de Software</strong> de la <strong>Universidad Tecnológica de Tula-Tepeji (UTTT)</strong>, bajo la coordinación del equipo de trabajo integrado por:
-      </p>
+        <div class="grid-cards-2x2">
+          <article class="info-card-clean">
+            <h3 class="info-card-title">Qué datos usamos</h3>
+            <p class="info-card-desc">Tu nombre, correo de acceso y geolocalización en el momento de buscar ofertas.</p>
+          </article>
+          <article class="info-card-clean">
+            <h3 class="info-card-title">Para qué los usamos</h3>
+            <p class="info-card-desc">Solo para mostrarte ofertas cerca de ti y reservar tu producto sin complicaciones.</p>
+          </article>
+          <article class="info-card-clean">
+            <h3 class="info-card-title">Tu ubicación</h3>
+            <p class="info-card-desc">Se ocupa en vivo para encontrar tu posición dentro de tu radio. También puedes buscar escribiendo tu calle o colonia.</p>
+          </article>
+          <article class="info-card-clean">
+            <h3 class="info-card-title">Tus derechos ARCO</h3>
+            <p class="info-card-desc">Puedes rectificar, cancelar o limitar el uso de tus datos. Hazlo desde Contacto o Eliminar Cuenta.</p>
+          </article>
+        </div>
 
-      <div class="team-grid">
-        <div class="team-member">
-          <span class="name">Rodrigo Sánchez Cruz</span>
-          <span class="role">Líder de Proyecto / Scrum Master & Pruebas</span>
-        </div>
-        <div class="team-member">
-          <span class="name">Alberto Cruz Zepeda</span>
-          <span class="role">Equipo de Desarrollo</span>
-        </div>
-        <div class="team-member">
-          <span class="name">Óscar José Salinas Escobar</span>
-          <span class="role">Equipo de Desarrollo & Calidad</span>
-        </div>
-        <div class="team-member">
-          <span class="name">María Del Rocío Cruz Cervantes</span>
-          <span class="role">Equipo de Desarrollo & Documentación</span>
-        </div>
+        <section class="legal-accordion-box" aria-label="Aviso de privacidad integral">
+          <div class="legal-clause-block">
+            <h3 class="legal-clause-title">1. Identidad y Responsables del Tratamiento</h3>
+            <p class="legal-clause-text">El proyecto <strong>Sensus</strong>, desarrollado por el equipo de ingeniería de software de la <strong>Universidad Tecnológica de Tula-Tepeji (UTTT)</strong>, integrado por Rodrigo Sánchez Cruz, Alberto Cruz Zapeda, Óscar Jose Salinas Escobar y Maria del Rocio Cruz Cervantes, con domicilio académico en Carretera Tula-San Marcos Km 2, Tula de Allende, Hidalgo, México, es el responsable del uso, protección y tratamiento de tus datos personales conforme a la <em>LFPDPPP</em> y directrices de <em>Google Play Store</em>.</p>
+          </div>
+          <div class="legal-clause-block">
+            <h3 class="legal-clause-title">2. Datos Personales que Recabamos</h3>
+            <p class="legal-clause-text">Recabamos nombre, correo electrónico y contraseña cifrada (hash). Para geolocalización, usamos coordenadas GPS temporales exclusivamente en primer plano (con la app abierta) para calcular la distancia a los comercios dentro del radio que tú seleccionas (100 m a 5 km).</p>
+            <p class="legal-clause-text"><strong>Datos que NO recabamos:</strong> No recopilamos números de tarjeta bancaria ni datos financieros (todos los pagos se realizan directamente en el mostrador del comercio físico). No rastreamos tu ubicación en segundo plano.</p>
+          </div>
+          <div class="legal-clause-block">
+            <h3 class="legal-clause-title">3. Finalidades del Tratamiento</h3>
+            <ul class="legal-clause-list">
+              <li>Mostrar en mapa y lista los comercios y ofertas disponibles a tu alrededor.</li>
+              <li>Generar tu folio alfanumérico y código QR de apartado para recoger productos sin filas.</li>
+              <li>Permitir que el asistente de ahorro <strong>Sensi IA</strong> analice el inventario disponible de tiendas abiertas para armar paquetes adaptados a tu presupuesto.</li>
+            </ul>
+          </div>
+          <div class="legal-clause-block" id="permisos">
+            <h3 class="legal-clause-title">4. Permisos del Dispositivo Móvil (Android)</h3>
+            <ul class="legal-clause-list">
+              <li><code>ACCESS_FINE_LOCATION</code> y <code>ACCESS_COARSE_LOCATION</code>: Ubicación temporal en primer plano mientras usas la app para mostrar ofertas dentro de tu radio.</li>
+              <li><code>CAMERA</code>: Exclusivo para comercios afiliados al momento de escanear el código QR del cliente.</li>
+              <li><code>POST_NOTIFICATIONS</code>: Notificar al usuario cuando su producto apartado esté listo.</li>
+            </ul>
+          </div>
+          <div class="legal-clause-block">
+            <h3 class="legal-clause-title">5. Cero Venta de Datos y Seguridad</h3>
+            <p class="legal-clause-text"><strong>Sensus NO vende, alquila ni comercializa tus datos personales</strong> con terceros ni empresas de publicidad. Toda la comunicación con el servidor viaja cifrada mediante protocolo <strong>HTTPS / TLS 1.3</strong>.</p>
+          </div>
+          <div class="legal-clause-block">
+            <h3 class="legal-clause-title">6. Ejercicio de Derechos ARCO y Baja Definitiva</h3>
+            <p class="legal-clause-text">Puedes solicitar la eliminación total e irreversible de tu cuenta y datos en cualquier momento desde nuestra página oficial de <a href="eliminar-cuenta.html">Eliminar cuenta</a> o escribiendo a <a href="mailto:sanxcruro122@gmail.com">sanxcruro122@gmail.com</a>.</p>
+          </div>
+        </section>
       </div>
+    </main>
 
-      <p>
-        En cumplimiento con las directrices de la <strong>Google Play Console Developer Program Policy</strong> y la legislación aplicable en materia de protección de datos personales (incluyendo la Ley Federal de Protección de Datos Personales en Posesión de los Particulares - LFPDPPP en los Estados Unidos Mexicanos), hacemos de su conocimiento los términos y condiciones bajo los cuales se tratan sus datos.
-      </p>
-
-
-      <!-- SECCIÓN 2: DATOS RECABADOS -->
-      <h2><span class="section-num">2</span> Datos Personales que Recabamos</h2>
-      <p>
-        Para cumplir con la misión de ser la plataforma de referencia para que las familias encuentren promociones, aprovechen descuentos de comercios y supermercados cercanos, reduzcan las mermas de productos en buen estado y reciban recetas personalizadas, <strong>Sensus</strong> recaba y trata las siguientes categorías de información:
-      </p>
-
-      <div class="data-table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Categoría</th>
-              <th>Datos Específicos</th>
-              <th>Propósito Principal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Datos de Registro y Cuenta</strong></td>
-              <td>Nombre completo, fecha de nacimiento, sexo, ocupación, rango de ingresos estimados, correo electrónico y credenciales seguras de acceso.</td>
-              <td>Creación del perfil de usuario, personalización socioeconómica de ofertas y verificación de identidad.</td>
-            </tr>
-            <tr>
-              <td><strong>Datos de Geolocalización</strong></td>
-              <td>Ubicación geográfica aproximada y precisa (coordenadas GPS de latitud y longitud).</td>
-              <td>Mostrar mapa radar de proximidad, cálculo de distancia a tiendas (filtro de 2 km en modo sin sesión y rango ampliado con sesión).</td>
-            </tr>
-            <tr>
-              <td><strong>Interacción Social</strong></td>
-              <td>Red de amigos cercanos agregados, promociones compartidas, cupones guardados y listas de productos preferidos.</td>
-              <td>Habilitar la dinámica de red social de ahorro colaborativo para compartir promociones con amigos.</td>
-            </tr>
-            <tr>
-              <td><strong>Inteligencia Artificial y Búsquedas</strong></td>
-              <td>Historial de promociones consultadas, términos de búsqueda, preferencias alimentarias e interacción con el Chatbot de Recetas.</td>
-              <td>Alimentar el modelo de Machine Learning para recomendación personalizada de productos y generación de recetas gastronómicas basadas en ofertas activas.</td>
-            </tr>
-            <tr>
-              <td><strong>Datos de Comercios Afiliados</strong></td>
-              <td>Nombre comercial, ubicación física, categoría, catálogo de productos con descuento y horario de atención.</td>
-              <td>Publicación de promociones en la plataforma para prevenir desperdicio de inventario y mermas.</td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- partial:footer:start -->
+<footer class="sensus-footer">
+  <div class="container">
+    <div class="footer-top-row">
+      <div>
+        <h3 class="footer-brand-title">Sensus · Lo bueno, por menos</h3>
+        <p class="footer-brand-desc">Proceso transparente de cancelación y protección de derechos ARCO.</p>
       </div>
-
-
-      <!-- SECCIÓN 3: FINALIDADES DEL TRATAMIENTO -->
-      <h2><span class="section-num">3</span> Finalidades del Tratamiento de los Datos</h2>
-
-      <h3>Finalidades Primarias (Necesarias para el Servicio):</h3>
-      <ol>
-        <li><strong>Geolocalización y Proximidad:</strong> Identificar y presentar comercios, supermercados y promociones en un radio inmediato del usuario (rango de hasta 2 km en acceso libre y personalizable al registrar sesión).</li>
-        <li><strong>Reducción de Mermas y Desperdicio:</strong> Conectar a consumidores con comercios locales que ponen en oferta productos en buen estado próximos a su fecha de consumo preferente.</li>
-        <li><strong>Recomendaciones Inteligentes (Machine Learning):</strong> Procesar los datos de perfil (edad, ocupación, ingresos estimados) junto con los patrones de búsqueda para sugerir ofertas relevantes y ajustadas al presupuesto familiar.</li>
-        <li><strong>Asistente Culinario (Chatbot de Recetas):</strong> Sugerir preparaciones y recetas alimenticias con base en los ingredientes y productos que actualmente se encuentran en oferta en las tiendas aledañas al usuario.</li>
-        <li><strong>Red Social de Ahorro:</strong> Permitir compartir promociones entre amigos, gestionar listas de compras y guardar cupones en el dispositivo.</li>
-      </ol>
-
-      <div class="callout callout-green">
-        <div class="callout-title">
-          <svg class="ios-icon" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-4 3.5-7.5 8-9 4.5 1.5 8 5 8 9a7 7 0 0 1-7 7z"/><path d="M12 4v16"/></svg>
-          Compromiso Ecológico y Social
-        </div>
-        <p>
-          Los datos procesados por Sensus tienen la finalidad intrínseca de apoyar la economía familiar y fomentar el consumo responsable, evitando que alimentos y mercancías en perfecto estado sean descartados por falta de visibilidad comercial.
-        </p>
-      </div>
-
-
-      <!-- SECCIÓN 4: PERMISOS DEL DISPOSITIVO -->
-      <h2><span class="section-num">4</span> Permisos del Dispositivo Móvil (Android)</h2>
-      <p>
-        Para su correcto funcionamiento, la aplicación solicita al sistema operativo Android los siguientes permisos explícitos:
-      </p>
-
-      <ul>
-        <li>
-          <strong><code>android.permission.ACCESS_FINE_LOCATION</code> (Ubicación precisa):</strong>
-          Utilizado para centrar el mapa interactivo y el radar en la posición exacta del usuario al momento de abrir la aplicación o consultar tiendas cercanas.
-        </li>
-        <li>
-          <strong><code>android.permission.ACCESS_COARSE_LOCATION</code> (Ubicación aproximada):</strong>
-          Utilizado como respaldo para calcular distancias estimadas a los establecimientos cuando la señal GPS de alta precisión no se encuentra disponible.
-        </li>
-        <li>
-          <strong><code>android.permission.INTERNET</code> (Acceso a Internet):</strong>
-          Requerido para consultar el catálogo de promociones actualizado en tiempo real, comunicarse con el servidor, sincronizar ofertas y consultar el chatbot.
-        </li>
+      <ul class="footer-links-list">
+        <li class="footer-link-item"><a href="index.html" data-nav="index.html">Inicio</a></li>
+        <li class="footer-link-item"><a href="privacidad.html" data-nav="privacidad.html">Privacidad</a></li>
+        <li class="footer-link-item"><a href="eliminar-cuenta.html" data-nav="eliminar-cuenta.html">Eliminar cuenta</a></li>
+        <li class="footer-link-item"><a href="contacto.html" data-nav="contacto.html">Contacto</a></li>
       </ul>
-
-      <div class="callout callout-orange">
-        <div class="callout-title">
-          <svg class="ios-icon" viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-          Declaración Estricta sobre Ubicación en Segundo Plano
-        </div>
-        <p>
-          <strong>Sensus NO solicita ni utiliza el permiso de ubicación en segundo plano</strong> (<code>ACCESS_BACKGROUND_LOCATION</code>). Sus datos de ubicación únicamente se consultan cuando la aplicación se encuentra en primer plano (abierta e interactuando en pantalla) y el usuario navega en el mapa o solicita calcular su proximidad.
-        </p>
-      </div>
-
-
-      <!-- SECCIÓN 5: MODELOS DE MACHINE LEARNING Y CHATBOT -->
-      <h2><span class="section-num">5</span> Inteligencia Artificial y Machine Learning</h2>
-      <p>
-        Sensus integra modelos de análisis de datos e inteligencia artificial con el único objetivo de optimizar la experiencia de usuario:
-      </p>
-      <ul>
-        <li><strong>Modelo Predictivo de Ofertas (ML):</strong> Analiza de forma agregada y pseudoanonimizada las tendencias de consumo y demografía para priorizar qué cupones mostrar primero en la pantalla de inicio.</li>
-        <li><strong>Chatbot Asistente de Recetas:</strong> Procesa las solicitudes culinarias del usuario cruzándolas con el inventario en descuento de su zona. Las conversaciones con el asistente no se utilizan para crear perfiles de publicidad externa ni se comercializan con redes publicitarias de terceros.</li>
-      </ul>
-
-
-      <!-- SECCIÓN 6: TRANSFERENCIA Y COMPARTICIÓN -->
-      <h2><span class="section-num">6</span> Transferencia y Compartición de Datos con Terceros</h2>
-      <p>
-        <strong>Sensus Team no vende, alquila ni comercializa datos personales de sus usuarios a terceros.</strong>
-      </p>
-      <p>
-        La información únicamente podrá ser compartida bajo las siguientes circunstancias técnicas esenciales:
-      </p>
-      <ul>
-        <li><strong>Proveedores de Infraestructura en la Nube:</strong> Servidores de bases de datos, APIs de mapas y servicios de hosting seguros con certificación SSL/TLS y estándares de cifrado vigentes.</li>
-        <li><strong>Amigos dentro de la App (Funcionalidad Social):</strong> Si decides compartir una oferta o cupón, tu nombre de usuario y la promoción elegida serán visibles para los contactos que hayas aceptado en tu red.</li>
-        <li><strong>Requerimientos Legales:</strong> Únicamente cuando sea ordenado por mandato judicial o autoridad competente conforme a la legislación aplicable.</li>
-      </ul>
-
-
-      <!-- SECCIÓN 7: SEGURIDAD Y RETENCIÓN -->
-      <h2><span class="section-num">7</span> Seguridad y Medidas de Protección</h2>
-      <p>
-        Implementamos medidas de seguridad administrativas, técnicas y físicas orientadas a proteger los datos personales contra daño, pérdida, alteración, destrucción o uso indebido:
-      </p>
-      <ul>
-        <li>Todas las comunicaciones entre la aplicación móvil y los servidores se realizan a través de canales seguros cifrados mediante el protocolo <strong>HTTPS (TLS/SSL)</strong>.</li>
-        <li>Las contraseñas de las cuentas de usuario se almacenan utilizando algoritmos de hashing criptográfico unidireccional con sal (*salting*).</li>
-        <li>Los cupones guardados en el dispositivo residen en el almacenamiento privado seguro de la aplicación.</li>
-      </ul>
-
-
-      <!-- SECCIÓN 8: DERECHOS ARCO Y ELIMINACIÓN DE CUENTA -->
-      <h2 id="eliminar-cuenta"><span class="section-num">8</span> Derechos ARCO y Mecanismo de Eliminación de Cuenta</h2>
-      <p>
-        Como titular de los datos personales, tienes en todo momento el derecho de ejercer tus derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong>, así como solicitar la eliminación definitiva de tu cuenta y los datos asociados, en estricto cumplimiento con la <strong>política de eliminación de cuentas de Google Play</strong>.
-      </p>
-
-      <div class="callout" style="border-left-color: #EF4444; background-color: #FEF2F2;">
-        <div class="callout-title" style="color: #991B1B;">
-          <svg class="ios-icon" style="color: #DC2626;" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-          Enlace y Formulario Directo de Solicitud de Eliminación
-        </div>
-        <p style="margin-bottom: 0.75rem;">
-          Para solicitar la eliminación inmediata de tu cuenta de usuario y de todos los datos personales asociados, puedes utilizar nuestra página web dedicada o enviar un correo:
-        </p>
-        <p style="margin-bottom: 1rem;">
-          <a href="https://rodnix.com.mx/sensus/eliminar-cuenta.html" target="_blank" style="color: #DC2626; font-weight: 700; text-decoration: underline; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 0.4rem;">
-            <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            Formulario Web Oficial para Solicitar Eliminación de Cuenta y Datos
-          </a>
-        </p>
-        <ol style="margin-bottom: 0.75rem;">
-          <li>Completando el formulario en el enlace anterior o enviando un correo a: <strong>sanxcruro122@gmail.com</strong> con el asunto <em>"Solicitud de Eliminación de Cuenta - Sensus"</em>.</li>
-          <li>Indicando el correo electrónico con el que te registraste en la aplicación.</li>
-        </ol>
-        <p style="margin-bottom: 0; font-size: 0.92rem; color: #4B5563;">
-          Una vez recibida la solicitud, nuestro equipo confirmará la identidad del titular y procederá a eliminar de forma permanente y definitiva el perfil, historial de búsquedas, red de amigos y datos demográficos en un plazo máximo de <strong>5 días hábiles</strong>.
-        </p>
-      </div>
-
-
-      <!-- SECCIÓN 9: MENORES DE EDAD -->
-      <h2><span class="section-num">9</span> Privacidad de Menores de Edad</h2>
-      <p>
-        Sensus está diseñada para el público en general y no está dirigida directamente a menores de 13 años. No recopilamos conscientemente datos de menores de 13 años sin el consentimiento correspondiente de sus padres o tutores. En caso de detectar que un menor de 13 años ha registrado una cuenta sin autorización comprobable, procederemos a dar de baja dicha cuenta de inmediato.
-      </p>
-
-
-      <!-- SECCIÓN 10: MODIFICACIONES -->
-      <h2><span class="section-num">10</span> Modificaciones al Aviso de Privacidad</h2>
-      <p>
-        Nos reservamos el derecho de actualizar o modificar el presente Aviso de Privacidad para adaptarlo a novedades legislativas, mejoras en la aplicación, integración de nuevas características de Machine Learning o políticas de Google Play. Cualquier cambio será publicado oportunamente en esta misma dirección web permanente:
-        <br>
-        <a href="https://rodnix.com.mx/sensus/privacidad.html" target="_blank" style="color: var(--primary); font-weight: 600;">https://rodnix.com.mx/sensus/privacidad.html</a>
-      </p>
-
-
-      <!-- SECCIÓN 11: CONTACTO DIRECTO -->
-      <h2><span class="section-num">11</span> Dudas, Aclaraciones y Contacto</h2>
-      <p>
-        Para cualquier pregunta, sugerencia, ejercicio de derechos ARCO o comentarios sobre el tratamiento de tus datos personales, puedes comunicarte directamente con el responsable del proyecto:
-      </p>
-
-      <div class="contact-box">
-        <div>
-          <strong>Responsable Principal de Privacidad:</strong>
-          <p>Rodrigo Sánchez Cruz (Líder de Proyecto • Sensus Team)</p>
-        </div>
-        <div>
-          <strong>Entidad Académica:</strong>
-          <p>Universidad Tecnológica de Tula-Tepeji (UTTT) • 10IDGS-G2</p>
-        </div>
-        <div>
-          <strong>Correo Electrónico de Contacto Oficial:</strong>
-          <br>
-          <a class="contact-email" href="mailto:sanxcruro122@gmail.com" style="display: inline-flex; align-items: center; gap: 0.4rem;">
-            <svg class="ios-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            sanxcruro122@gmail.com
-          </a>
-        </div>
-      </div>
-
     </div>
-  </main>
+    <div class="footer-bottom-row">
+      <div>© 2026 Sensus Team • Universidad Tecnológica de Tula-Tepeji (UTTT).</div>
+      <div>Alojado en <a href="https://rodnix.com.mx" target="_blank" rel="noopener">rodnix.com.mx</a></div>
+    </div>
+  </div>
+</footer>
 
-  <!-- PIE DE PÁGINA -->
-  <footer>
-    <p>
-      © 2026 Sensus Team • Universidad Tecnológica de Tula-Tepeji. Todos los derechos reservados.
-    </p>
-    <p style="margin-top: 0.5rem; color: #94A3B8;">
-      Alojado en rodnix.com.mx • Documento web estático conforme a Google Play Developer Policy.
-    </p>
-  </footer>
+<!-- partial:footer:end -->
+  </div>
 
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

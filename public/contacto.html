@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contacto | Sensus</title>
+  <meta name="description" content="¿Dudas, ideas o quieres ejercer tus derechos ARCO? Escríbenos a Sensus.">
+  <link rel="canonical" href="https://rodnix.com.mx/sensus/contacto.html">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#7C3AED">
+
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="page-contacto">
+
+  <div class="page-wrapper">
+    <!-- partial:header:start -->
+<header class="top-nav">
+  <div class="container">
+    <div class="top-nav-inner">
+      <a href="index.html" class="brand-clean" aria-label="Sensus Inicio">
+        <img src="assets/logo.png" alt="Sensus" class="brand-logo-img" width="36" height="36" loading="eager">
+        <span class="brand-title">Sensus</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- partial:header:end -->
+
+    <div class="bg-scene" aria-hidden="true">
+      <div class="bg-scene__blob bg-scene__blob--orange"></div>
+      <div class="bg-scene__blob bg-scene__blob--green"></div>
+      <div class="bg-scene__blob bg-scene__blob--violet"></div>
+      <div class="bg-scene__blob bg-scene__blob--red"></div>
+    </div>
+
+    <main class="page-main">
+      <div class="container">
+        <header class="page-header-clean">
+          <h1 class="page-header-title">Contacto</h1>
+          <p class="page-header-subtitle">
+            ¿Dudas, ideas o quieres ejercer tus derechos ARCO? Escríbenos.
+          </p>
+        </header>
+
+        <div class="contact-grid-2col">
+          <section class="contact-card-peach" aria-labelledby="whatsapp-title">
+            <div>
+              <h2 id="whatsapp-title" class="contact-card-title">Respuesta más rápida</h2>
+              <p class="contact-card-desc">
+                Escríbenos por WhatsApp y te ayudamos con tu cuenta, tus reservas o tu saldo.
+              </p>
+            </div>
+            <div id="whatsappButton"></div>
+          </section>
+
+          <section class="contact-card-white" aria-labelledby="form-title">
+            <h2 id="form-title" class="contact-card-title">O déjanos un mensaje</h2>
+
+            <form id="contactForm" class="contact-form" novalidate>
+              <div class="form-field-group">
+                <label for="contactName">Nombre</label>
+                <input type="text" id="contactName" name="name" class="form-field-input" required minlength="2" maxlength="80" placeholder="Nombre">
+                <p class="form-error" id="contactNameError" role="alert"></p>
+              </div>
+
+              <div class="form-field-group">
+                <label for="contactEmail">Correo</label>
+                <input type="email" id="contactEmail" name="email" class="form-field-input" required placeholder="Correo">
+                <p class="form-error" id="contactEmailError" role="alert"></p>
+              </div>
+
+              <div class="form-field-group">
+                <label for="contactMessage">Mensaje</label>
+                <textarea id="contactMessage" name="message" class="form-field-input" rows="4" required minlength="10" maxlength="1000" placeholder="Mensaje"></textarea>
+                <p class="form-error" id="contactMessageError" role="alert"></p>
+              </div>
+
+              <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+              <button type="submit" class="btn-violet-pill" id="contactSubmit">Enviar mensaje</button>
+              <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- partial:footer:start -->
+<footer class="sensus-footer">
+  <div class="container">
+    <div class="footer-top-row">
+      <div>
+        <h3 class="footer-brand-title">Sensus · Lo bueno, por menos</h3>
+        <p class="footer-brand-desc">Proceso transparente de cancelación y protección de derechos ARCO.</p>
+      </div>
+      <ul class="footer-links-list">
+        <li class="footer-link-item"><a href="index.html" data-nav="index.html">Inicio</a></li>
+        <li class="footer-link-item"><a href="privacidad.html" data-nav="privacidad.html">Privacidad</a></li>
+        <li class="footer-link-item"><a href="eliminar-cuenta.html" data-nav="eliminar-cuenta.html">Eliminar cuenta</a></li>
+        <li class="footer-link-item"><a href="contacto.html" data-nav="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom-row">
+      <div>© 2026 Sensus Team • Universidad Tecnológica de Tula-Tepeji (UTTT).</div>
+      <div>Alojado en <a href="https://rodnix.com.mx" target="_blank" rel="noopener">rodnix.com.mx</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- partial:footer:end -->
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { renderWhatsAppButton } from './js/ui/storeButtons.js';
+    renderWhatsAppButton(document.getElementById('whatsappButton'));
+  </script>
+</body>
+</html>

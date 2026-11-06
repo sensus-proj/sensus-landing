@@ -29,3 +29,9 @@ dist-ssr
 *.sln
 *.sw?
 Thumbs.db
+
+# Test screenshots and reports
+tests/screenshots/
+reports/
+assets-src/
+

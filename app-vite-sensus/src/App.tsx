@@ -698,7 +698,7 @@ function BottomNav({
   locked?: boolean
   onNavigate?: (id: string) => void
 }) {
-  const items: { id: string label: string icon: IconName }[] = [
+  const items: { id: string; label: string; icon: IconName }[] = [
     { id: "home", label: "Inicio", icon: "home" },
     { id: "map", label: "Mapa", icon: "map" },
     { id: "chat", label: "Chef", icon: locked ? "lock" : "chef" },
@@ -767,7 +767,7 @@ function BottomNav({
   )
 }
 
-function OfferCard({ o, onClick }: { o: Offer onClick?: () => void }) {
+function OfferCard({ o, onClick }: { o: Offer; onClick?: () => void }) {
   return (
     <div
       onClick={onClick}
@@ -904,7 +904,7 @@ function OfferCard({ o, onClick }: { o: Offer onClick?: () => void }) {
   )
 }
 
-function Av({ f, size = 36 }: { f: typeof FRIENDS[0] size?: number }) {
+function Av({ f, size = 36 }: { f: typeof FRIENDS[0]; size?: number }) {
   return (
     <div
       style={{
@@ -5734,7 +5734,7 @@ function ScreenSearchDiscovery({
   const [distance, setDistance] = useState(2)
   const [discount, setDiscount] = useState("30%+")
   const [sort, setSort] = useState("Más cercano")
-  const categories: { label: string icon: IconName }[] = [
+  const categories: { label: string; icon: IconName }[] = [
     { label: "Frutas y verduras", icon: "strawberry" },
     { label: "Lácteos y huevos", icon: "milk" },
     { label: "Panadería", icon: "package" },
@@ -7692,7 +7692,7 @@ const SCREEN_IDS = [
 ] as const
 type ScreenId = typeof SCREEN_IDS[number]
 
-const SCREEN_META: Record<ScreenId, { label: string tag: string }> = {
+const SCREEN_META: Record<ScreenId, { label: string; tag: string }> = {
   splash: { label: "Bienvenida", tag: "01" },
   guest: { label: "Inicio · Invitado", tag: "02" },
   register: { label: "Registro", tag: "03" },

@@ -1,0 +1,12 @@
+{
+  "name": "sensus-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test:unit": "node --test tests/unit/**/*.test.js",
+    "test:responsive": "node scripts/test-responsive-captures.js",
+    "lint": "node scripts/check-assets.js"
+  }
+}

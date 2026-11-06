@@ -2,477 +2,183 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solicitud de Eliminación de Cuenta y Datos | Sensus App</title>
-  <meta name="description" content="Página oficial para solicitar la eliminación de tu cuenta de usuario y borrado permanente de datos personales en la aplicación móvil Sensus.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Eliminar cuenta | Sensus</title>
+  <meta name="description" content="Solicita la eliminación de tu cuenta y datos en Sensus.">
   <link rel="canonical" href="https://rodnix.com.mx/sensus/eliminar-cuenta.html">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#7C3AED">
 
-  <style>
-    :root {
-      --primary: #7C3AED;
-      --primary-dark: #6D28D9;
-      --primary-light: #EDE9FE;
-      --primary-soft: #F5F3FF;
-      --orange: #F97316;
-      --orange-light: #FFF7ED;
-      --red: #EF4444;
-      --red-light: #FEF2F2;
-      --green: #22C55E;
-      --green-light: #DCFCE7;
-      --green-whatsapp: #25D366;
-      --bg: #F9FAFB;
-      --surface: #FFFFFF;
-      --text-main: #1F2937;
-      --text-body: #1F2937;
-      --text-muted: #6B7280;
-      --border: #E5E7EB;
-      --radius: 14px;
-      --shadow-sm: 0 1px 3px rgba(31, 41, 55, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(31, 41, 55, 0.08), 0 2px 4px -2px rgba(31, 41, 55, 0.06);
-    }
+  <link rel="icon" type="image/png" href="assets/logo.png">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text-body);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .ios-icon {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      display: inline-block;
-      vertical-align: middle;
-      flex-shrink: 0;
-    }
-
-    header {
-      background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 50%, #8B5CF6 100%);
-      color: #FFFFFF;
-      padding: 3.5rem 1.5rem 4rem;
-      position: relative;
-      text-align: center;
-    }
-
-    .header-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(8px);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    h1 {
-      font-size: 2.25rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      margin-bottom: 0.75rem;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: #E9D5FF;
-      max-width: 650px;
-      margin: 0 auto;
-    }
-
-    .main-wrapper {
-      max-width: 800px;
-      margin: -2rem auto 4rem;
-      padding: 0 1.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border);
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--primary-light);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    p {
-      margin-bottom: 1rem;
-    }
-
-    ul, ol {
-      margin-bottom: 1.25rem;
-      padding-left: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    .alert-danger {
-      background-color: var(--red-light);
-      border-left: 4px solid var(--red);
-      padding: 1.25rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-    }
-
-    .alert-danger h3 {
-      color: #991B1B;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    input[type="email"], select, textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
-      color: var(--text-main);
-      background-color: #FFFFFF;
-      transition: border-color 0.2s;
-    }
-
-    input[type="email"]:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
-    }
-
-    .btn-submit {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-      color: #FFFFFF;
-      font-size: 1.05rem;
-      font-weight: 700;
-      padding: 0.85rem 1.5rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.1s;
-    }
-
-    .btn-submit:hover {
-      opacity: 0.95;
-    }
-
-    .btn-submit:active {
-      transform: scale(0.99);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      background-color: var(--primary-soft);
-      color: var(--primary-dark);
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      border: 1px solid var(--primary-light);
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: 0.75rem;
-      text-align: center;
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--primary-light);
-    }
-
-    .steps-box {
-      background-color: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      margin: 1.25rem 0;
-    }
-
-    .step-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      background-color: var(--primary);
-      color: #FFFFFF;
-      border-radius: 50%;
-      font-size: 0.8rem;
-      font-weight: bold;
-      margin-right: 0.5rem;
-    }
-
-    .data-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin: 1.25rem 0;
-    }
-
-    .data-card {
-      background-color: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-    }
-
-    .data-card h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .data-card.deleted h4 {
-      color: #DC2626;
-    }
-
-    .data-card.retained h4 {
-      color: var(--text-muted);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 640px) {
-      .card {
-        padding: 1.5rem;
-      }
-      h1 {
-        font-size: 1.75rem;
-      }
-      .data-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="page-eliminar">
 
-  <header>
-    <div class="header-container">
-      <div class="badge-pill">
-        <svg class="ios-icon ios-icon-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Google Play Policy • Account Deletion</span>
-      </div>
-      <h1>Solicitud de Eliminación de Cuenta y Datos</h1>
-      <p class="subtitle">
-        Proceso formal para la eliminación definitiva de tu cuenta de usuario, perfil y datos personales en la aplicación <strong>Sensus</strong>.
-      </p>
+  <div class="page-wrapper">
+    <!-- partial:header:start -->
+<header class="top-nav">
+  <div class="container">
+    <div class="top-nav-inner">
+      <a href="index.html" class="brand-clean" aria-label="Sensus Inicio">
+        <img src="assets/logo.png" alt="Sensus" class="brand-logo-img" width="36" height="36" loading="eager">
+        <span class="brand-title">Sensus</span>
+      </a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="main-wrapper">
-    <div class="card">
+<!-- partial:header:end -->
 
-      <div class="alert-danger">
-        <h3 style="display: flex; align-items: center; gap: 0.4rem;">
-          <svg class="ios-icon" style="color: #DC2626;" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Acción Permanente e Irreversible
-        </h3>
-        <p style="margin-bottom: 0; font-size: 0.92rem;">
-          Al solicitar la eliminación de tu cuenta en Sensus, se dará de baja tu perfil y se eliminará toda la información asociada de nuestros servidores. No podrás recuperar tu historial de cupones ni tu red de amigos.
-        </p>
-      </div>
+    <div class="bg-scene" aria-hidden="true">
+      <div class="bg-scene__blob bg-scene__blob--orange"></div>
+      <div class="bg-scene__blob bg-scene__blob--green"></div>
+      <div class="bg-scene__blob bg-scene__blob--violet"></div>
+      <div class="bg-scene__blob bg-scene__blob--red"></div>
+    </div>
 
-      <h2>
-        <svg class="ios-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        Formulario de Solicitud Directa
-      </h2>
-      <p>
-        Para ejercer tu derecho de cancelación y eliminación definitiva de cuenta según las directrices de <strong>Google Play Store</strong> y la <strong>LFPDPPP</strong>, completa el siguiente formulario o escribe directamente a nuestro canal de soporte:
-      </p>
-
-      <form id="deletionForm" onsubmit="handleDeletionSubmit(event)">
-        <div class="form-group">
-          <label for="userEmail">Correo electrónico registrado en Sensus *</label>
-          <input type="email" id="userEmail" required placeholder="ejemplo@correo.com">
-        </div>
-
-        <div class="form-group">
-          <label for="reason">Motivo de la solicitud (Opcional)</label>
-          <select id="reason">
-            <option value="Ya no utilizo la aplicación">Ya no utilizo la aplicación</option>
-            <option value="Preocupaciones de privacidad">Preocupaciones de privacidad</option>
-            <option value="Crear una cuenta nueva">Deseo crear una cuenta nueva</option>
-            <option value="Otro motivo">Otro motivo</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="additionalNotes">Comentarios adicionales (Opcional)</label>
-          <textarea id="additionalNotes" rows="3" placeholder="Detalles adicionales sobre tu solicitud..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">
-          <svg class="ios-icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-          Enviar Solicitud de Eliminación de Cuenta
-        </button>
-
-        <a href="mailto:sanxcruro122@gmail.com?subject=Solicitud%20de%20Eliminaci%C3%B3n%20de%20Cuenta%20-%20Sensus" class="btn-secondary">
-          <svg class="ios-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          O enviar correo directamente a sanxcruro122@gmail.com
-        </a>
-      </form>
-
-      <div id="confirmationNotice" style="display:none; margin-top: 1.5rem;" class="alert-danger" role="alert">
-        <h3 style="color: #047857; display: flex; align-items: center; gap: 0.4rem;">
-          <svg class="ios-icon" style="color: var(--green);" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Solicitud lista para envío
-        </h3>
-        <p style="color: #065F46; font-size: 0.95rem; margin-bottom: 0;">
-          Se abrirá tu cliente de correo para enviar la solicitud oficial a <strong>sanxcruro122@gmail.com</strong>. Nuestro equipo de soporte procesará la baja definitiva en un plazo máximo de <strong>5 días hábiles</strong>.
-        </p>
-      </div>
-
-      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
-
-      <h2>
-        <svg class="ios-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        ¿Qué datos se eliminan y qué datos se conservan?
-      </h2>
-
-      <div class="data-grid">
-        <div class="data-card deleted">
-          <h4>
-            <svg class="ios-icon ios-icon-sm" style="color: #DC2626;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            Datos que se ELIMINAN permanentemente:
-          </h4>
-          <ul style="font-size: 0.88rem; padding-left: 1.2rem; margin-bottom: 0;">
-            <li>Nombre completo y credenciales de acceso.</li>
-            <li>Fecha de nacimiento, sexo, ocupación e ingresos.</li>
-            <li>Red de amigos y promociones compartidas.</li>
-            <li>Cupones guardados e historial de favoritos.</li>
-            <li>Conversaciones con el Chatbot de Recetas.</li>
-            <li>Preferencias y datos asociados al modelo de ML.</li>
-            <li>Historial de geolocalización efímera.</li>
-          </ul>
-        </div>
-
-        <div class="data-card retained">
-          <h4>
-            <svg class="ios-icon ios-icon-sm" style="color: var(--text-muted);" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            Datos que se CONSERVAN (si aplica):
-          </h4>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-            No conservamos datos personales tras la confirmación de la baja. Únicamente se retienen de forma anónima:
+    <main class="page-main">
+      <div class="container">
+        <header class="page-header-clean">
+          <h1 class="page-header-title">Eliminar cuenta</h1>
+          <p class="page-header-subtitle">
+            Un proceso transparente y ágil. Sigue los 3 pasos y te confirmamos cada paso. Antes de solicitarlo, cancela o recoge tus reservas activas.
           </p>
-          <ul style="font-size: 0.88rem; padding-left: 1.2rem; margin-bottom: 0;">
-            <li>Registros de transacciones de comercios por motivos legales/fiscales (si eres establecimiento afiliado).</li>
-            <li>Métricas estadísticas globales totalmente disociadas de cualquier identidad individual.</li>
-          </ul>
+        </header>
+
+        <div class="grid-steps-3">
+          <article class="step-card-clean">
+            <div class="step-badge-circle">1</div>
+            <h3 class="step-clean-title">Solicítalo</h3>
+            <p class="step-clean-desc">Pide el borrado en el formulario aquí o con un botón en la app.</p>
+          </article>
+          <article class="step-card-clean">
+            <div class="step-badge-circle">2</div>
+            <h3 class="step-clean-title">Confirma que eres tú</h3>
+            <p class="step-clean-desc">Verificamos tu identidad para proteger tu cuenta.</p>
+          </article>
+          <article class="step-card-clean">
+            <div class="step-badge-circle">3</div>
+            <h3 class="step-clean-title">Borramos tus datos</h3>
+            <p class="step-clean-desc">Eliminan tu perfil y los datos que no sean de ley en 5 días.</p>
+          </article>
         </div>
+
+        <div>
+          <button type="button" class="btn-action-outline" data-scroll-target="formSection">Solicitar eliminación de mi cuenta</button>
+        </div>
+
+        <section class="legal-accordion-box" id="formSection" aria-labelledby="form-title">
+          <div class="notice-warning">
+            <span class="material-symbols-outlined icon icon--warning" aria-hidden="true">warning</span>
+            <div class="notice-warning__content">
+              <h4 class="notice-warning__title">Acción Permanente e Irreversible</h4>
+              <p class="notice-warning__text">Al confirmar la baja de tu cuenta, se eliminará tu perfil y todos tus registros de forma irrecuperable.</p>
+            </div>
+          </div>
+
+          <h3 class="legal-clause-title form-section-title">Formulario Directo de Solicitud</h3>
+
+          <form id="deletionForm" class="deletion-form">
+            <div class="form-field-group">
+              <label for="userEmail">Correo electrónico registrado en Sensus *</label>
+              <input type="email" id="userEmail" class="form-field-input" required placeholder="tu-correo@ejemplo.com">
+            </div>
+
+            <div class="form-field-group">
+              <label for="reason">Motivo de la solicitud (Opcional)</label>
+              <select id="reason" class="form-field-input">
+                <option value="Ya no utilizo la aplicación">Ya no utilizo la aplicación</option>
+                <option value="Preocupaciones de privacidad">Preocupaciones de privacidad</option>
+                <option value="Deseo crear una cuenta nueva">Deseo crear una cuenta nueva</option>
+                <option value="Otro motivo">Otro motivo</option>
+              </select>
+            </div>
+
+            <div class="form-field-group">
+              <label for="additionalNotes">Comentarios adicionales (Opcional)</label>
+              <textarea id="additionalNotes" class="form-field-input" rows="3" placeholder="Detalles sobre tu solicitud..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-violet-pill deletion-submit">
+              <span class="material-symbols-outlined icon" aria-hidden="true">delete</span>
+              <span>Confirmar y Enviar Solicitud</span>
+            </button>
+          </form>
+
+          <div id="confirmationNotice" class="notice-success" hidden>
+            <h4 class="notice-success__title">
+              <span class="material-symbols-outlined icon" aria-hidden="true">check_circle</span>
+              Solicitud lista para envío
+            </h4>
+            <p class="notice-success__text">Se abrirá tu cliente de correo para enviar la solicitud oficial. Nuestro equipo procesará la purga total en un plazo de <strong>5 días hábiles</strong>.</p>
+          </div>
+
+          <div class="data-deletion">
+            <h4 class="data-deletion__title">¿Qué datos se eliminan?</h4>
+            <ul class="legal-clause-list">
+              <li>Nombre completo, correo y credenciales de acceso.</li>
+              <li>Historial de folios, apartados y reservas realizadas.</li>
+              <li>Comercios guardados en favoritos e interacciones con Sensi IA.</li>
+              <li>Ubicación efímera registrada temporalmente en el dispositivo.</li>
+            </ul>
+          </div>
+        </section>
       </div>
+    </main>
 
-      <h2>
-        <svg class="ios-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Plazos y Procedimiento de Eliminación
-      </h2>
-      <div class="steps-box">
-        <p><span class="step-num">1</span> <strong>Recepción:</strong> Confirmamos la recepción de tu solicitud dentro de las primeras 48 horas.</p>
-        <p><span class="step-num">2</span> <strong>Verificación:</strong> Se valida la titularidad del correo electrónico registrado.</p>
-        <p><span class="step-num">3</span> <strong>Purga definitiva:</strong> En un plazo no mayor a <strong>5 días hábiles</strong>, todos los datos personales son eliminados de forma irrecuperable de nuestras bases de datos.</p>
+    <!-- partial:footer:start -->
+<footer class="sensus-footer">
+  <div class="container">
+    <div class="footer-top-row">
+      <div>
+        <h3 class="footer-brand-title">Sensus · Lo bueno, por menos</h3>
+        <p class="footer-brand-desc">Proceso transparente de cancelación y protección de derechos ARCO.</p>
       </div>
-
-      <p style="text-align: center; margin-top: 2rem; font-size: 0.92rem;">
-        Para consultar nuestro Aviso de Privacidad completo, visita:
-        <br>
-        <a href="https://rodnix.com.mx/sensus/privacidad.html" style="color: var(--primary); font-weight: 700;">
-          Aviso de Privacidad Integral de Sensus
-        </a>
-      </p>
-
+      <ul class="footer-links-list">
+        <li class="footer-link-item"><a href="index.html" data-nav="index.html">Inicio</a></li>
+        <li class="footer-link-item"><a href="privacidad.html" data-nav="privacidad.html">Privacidad</a></li>
+        <li class="footer-link-item"><a href="eliminar-cuenta.html" data-nav="eliminar-cuenta.html">Eliminar cuenta</a></li>
+        <li class="footer-link-item"><a href="contacto.html" data-nav="contacto.html">Contacto</a></li>
+      </ul>
     </div>
-  </main>
+    <div class="footer-bottom-row">
+      <div>© 2026 Sensus Team • Universidad Tecnológica de Tula-Tepeji (UTTT).</div>
+      <div>Alojado en <a href="https://rodnix.com.mx" target="_blank" rel="noopener">rodnix.com.mx</a></div>
+    </div>
+  </div>
+</footer>
 
-  <footer>
-    <p>© 2026 Sensus Team • Universidad Tecnológica de Tula-Tepeji</p>
-    <p style="margin-top: 0.25rem; color: #94A3B8;">Responsable: Rodrigo Sánchez Cruz (sanxcruro122@gmail.com)</p>
-  </footer>
+<!-- partial:footer:end -->
+  </div>
 
-  <script>
-    function handleDeletionSubmit(e) {
-      e.preventDefault();
-      var email = document.getElementById('userEmail').value;
-      var reason = document.getElementById('reason').value;
-      var notes = document.getElementById('additionalNotes').value;
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { markActiveNav } from './js/ui/activeNav.js';
+    markActiveNav();
 
-      var subject = encodeURIComponent("Solicitud de Eliminación de Cuenta - Sensus (" + email + ")");
-      var body = encodeURIComponent(
-        "Hola equipo de soporte de Sensus,\n\n" +
-        "Por medio de la presente solicito la eliminación definitiva de mi cuenta de usuario y el borrado total de todos mis datos personales asociados a la app Sensus.\n\n" +
-        "Correo de la cuenta: " + email + "\n" +
-        "Motivo: " + reason + "\n" +
-        "Comentarios adicionales: " + notes + "\n\n" +
-        "Entiendo que esta acción es permanente e irreversible.\n\n" +
-        "Atentamente,\n" + email
-      );
+    const scrollButton = document.querySelector('[data-scroll-target]');
+    if (scrollButton) {
+      scrollButton.addEventListener('click', () => {
+        const target = document.getElementById(scrollButton.dataset.scrollTarget);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
 
-      document.getElementById('confirmationNotice').style.display = 'block';
-      window.location.href = "mailto:sanxcruro122@gmail.com?subject=" + subject + "&body=" + body;
+    const form = document.getElementById('deletionForm');
+    if (form) {
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const email = document.getElementById('userEmail').value;
+        const reason = document.getElementById('reason').value;
+        const notes = document.getElementById('additionalNotes').value;
+        const subject = encodeURIComponent('Solicitud de Eliminación de Cuenta - Sensus (' + email + ')');
+        const body = encodeURIComponent('Hola equipo de soporte de Sensus,\n\nPor medio de la presente solicito la eliminación definitiva de mi cuenta y datos asociados a la app Sensus.\n\nCorreo: ' + email + '\nMotivo: ' + reason + '\nNotas: ' + notes + '\n\nEntiendo que esta acción es permanente.\n\nAtentamente,\n' + email);
+        const notice = document.getElementById('confirmationNotice');
+        if (notice) notice.hidden = false;
+        window.location.href = 'mailto:sanxcruro122@gmail.com?subject=' + subject + '&body=' + body;
+      });
     }
   </script>
 </body>
