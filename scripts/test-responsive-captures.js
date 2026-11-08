@@ -106,17 +106,19 @@ server.listen(9877, async () => {
     const listRes = await fetch(`http://127.0.0.1:${debuggingPort}/json/list`);
     const pages = await listRes.json();
     const page = pages.find(p => p.type === 'page') || pages[0];
-    const rawWsUrl = String(page.webSocketDebuggerUrl || '');
+    const ALLOWED_HOSTS = ['127.0.0.1', 'localhost'];
+    const rawWsUrl = String(page?.webSocketDebuggerUrl || '');
     const parsedWs = new URL(rawWsUrl);
     if (
+      !ALLOWED_HOSTS.includes(parsedWs.hostname) ||
       parsedWs.protocol !== 'ws:' ||
-      (parsedWs.hostname !== '127.0.0.1' && parsedWs.hostname !== 'localhost') ||
-      Number(parsedWs.port) !== debuggingPort
+      parsedWs.port !== String(debuggingPort)
     ) {
       throw new Error('Invalid or untrusted WebSocket debugger URL');
     }
 
-    const safeWsUrl = parsedWs.href.replace(/[\r\n]/g, '');
+    const cleanPath = parsedWs.pathname.replace(/[^a-zA-Z0-9_\/-]/g, '');
+    const safeWsUrl = `ws://127.0.0.1:${debuggingPort}${cleanPath}`;
     console.log('Conectado a la página de Chrome:', safeWsUrl);
 
     const ws = new WebSocket(safeWsUrl);
