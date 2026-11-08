@@ -19,17 +19,17 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio completo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
       - name: 🔒 Gitleaks Secret Scanner
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🐕 TruffleHog OSS Secret Scanner
-        uses: trufflesecurity/trufflehog@main
+        uses: trufflesecurity/trufflehog@f8221ca52ac51bf66228d6ec3691f3ea0782ae15 # main
         with:
           path: ./
           extra_args: --only-verified
@@ -42,10 +42,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: 🟢 Configurar Node.js (v22)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -72,10 +72,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: 🟢 Configurar Node.js (v22)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -102,7 +102,7 @@ jobs:
         working-directory: ./app-vite-sensus
         run: |
           npm ci --ignore-scripts
-          npx tsc --noEmit
+          npm run type-check
           npm run build
 
   # =========================================================================
@@ -113,10 +113,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: 🐍 Configurar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
           python-version: '3.12'
 
@@ -124,20 +124,42 @@ jobs:
         run: python3 scripts/verify-compliance.py
 
   # =========================================================================
-  # 5. DESPLIEGUE A PRODUCCIÓN NEUBOX (EXCLUSIVO TRAS APROBAR TODAS LAS COMPUERTAS)
+  # 5. GATE DE SUITES DEVSECOPS EXTERNAS Y SONARCLOUD (Bloqueante Estricto)
+  # =========================================================================
+  sonar-and-devsecops-gate:
+    name: '🛡️ Compuerta 5: Validación de SonarCloud y Suites DevSecOps'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: 🟢 Configurar Node.js (v22)
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '22'
+
+      - name: 🛡️ Verificar que todas las suites y SonarCloud Quality Gate hayan pasado
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: node scripts/verify-deployment-gates.js
+
+  # =========================================================================
+  # 6. DESPLIEGUE A PRODUCCIÓN NEUBOX (EXCLUSIVO TRAS APROBAR TODAS LAS COMPUERTAS)
   # =========================================================================
   deploy:
     name: 🚀 Despliegue seguro a Neubox
-    needs: [secrets-gate, sca-gate, quality-gate, integrity-gate]
+    needs: [secrets-gate, sca-gate, quality-gate, integrity-gate, sonar-and-devsecops-gate]
     runs-on: ubuntu-24.04
     if: github.ref == 'refs/heads/main' && success()
 
     steps:
       - name: 📥 Clonar repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: 🟢 Configurar Node.js (v22)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: '22'
 
@@ -152,7 +174,7 @@ jobs:
       # Aislamiento total: Solo sube a /sensus/ sin tocar la raíz de rodnix.com.mx
       # =====================================================================
       - name: 🌐 Subir Landing Page a /public_html/sensus/
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -173,7 +195,7 @@ jobs:
       # SUBIDA DE ASSETLINKS A /public_html/.well-known/ (Android App Links)
       # =====================================================================
       - name: 📱 Subir Android Asset Links a /public_html/.well-known/
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}

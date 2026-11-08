@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: process.env.FIGMA_DEV_SERVER_HOST || "0.0.0.0",
-      port: parseInt(process.env.PORT || "8443"),
+      port: Number.parseInt(process.env.PORT || "8443", 10),
       strictPort: true,
       watch: {
         ignored: ["**/.figma/**"],
@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => {
     },
     preview: {
       host: process.env.FIGMA_DEV_SERVER_HOST || "0.0.0.0",
-      port: parseInt(process.env.PORT || "8443"),
+      port: Number.parseInt(process.env.PORT || "8443", 10),
     },
   }
 })
@@ -333,7 +333,7 @@ function figmaReactRefreshBoundaryFallback(): Plugin {
     },
     transform(code, id) {
       if (!/\.[jt]sx?(?:\?|$)/.test(id) || id.includes("/node_modules/"))
-        return null
+        return
 
       const moduleId = id.split("?")[0] ?? id
       const hasRefreshBoundary = code.includes("registerExportsForReactRefresh")
@@ -343,8 +343,6 @@ function figmaReactRefreshBoundaryFallback(): Plugin {
       if (previousHadRefreshBoundary && !hasRefreshBoundary) {
         queueMicrotask(() => sendFullReload?.())
       }
-
-      return null
     },
   }
 }
