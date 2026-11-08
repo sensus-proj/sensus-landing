@@ -12,82 +12,141 @@ concurrency:
 
 jobs:
   # =========================================================================
-  # 1. DEVSECOPS SECURITY & INTEGRITY GATE (Bloqueante)
+  # 1. GATE DE SECRETOS Y CREDENCIALES (Gitleaks & TruffleHog)
   # =========================================================================
-  security-gate:
-    name: 🛡️ Pre-Deploy Security Gate
+  secrets-gate:
+    name: 🔒 Compuerta 1: Escaneo de Secretos
     runs-on: ubuntu-24.04
-
     steps:
-      - name: 📥 Clonar repositorio
+      - name: 📥 Clonar repositorio completo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Escaneo de secretos
       - name: 🔒 Gitleaks Secret Scanner
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Verificación de integridad de Android App Links
-      - name: 📱 Validar public/.well-known/assetlinks.json
-        run: |
-          python3 -c "
-          import json, re
-          with open('public/.well-known/assetlinks.json') as f:
-              data = json.load(f)
-              assert len(data) > 0, 'assetlinks.json está vacío'
-              entry = data[0]
-              relations = entry.get('relation', [])
-              assert 'delegate_permission/common.handle_all_urls' in relations, 'Falta permiso handle_all_urls'
-              assert 'delegate_permission/common.get_login_creds' in relations, 'Falta permiso get_login_creds'
-              target = entry.get('target', {})
-              assert target.get('namespace') == 'android_app', 'Namespace debe ser android_app'
-              assert target.get('package_name') == 'sensus.com', 'Package name inválido'
-              fingerprints = target.get('sha256_cert_fingerprints', [])
-              assert len(fingerprints) > 0, 'Falta huella SHA-256'
-              pattern = re.compile(r'^([0-9A-F]{2}:){31}[0-9A-F]{2}$')
-              for fp in fingerprints:
-                  assert pattern.match(fp), f'Formato SHA-256 inválido: {fp}'
-          print('✅ assetlinks.json validado formalmente con permisos y huellas')
-          "
+      - name: 🐕 TruffleHog OSS Secret Scanner
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          head: ${{ github.sha }}
+          extra_args: --only-verified
 
-      # Verificación de URLs legales obligatorias por Google Play
-      - name: ⚖️ Validar páginas legales requeridas por Google Play
-        run: |
-          test -f public/privacidad.html || (echo '❌ Falta public/privacidad.html' && exit 1)
-          test -f public/eliminar-cuenta.html || (echo '❌ Falta public/eliminar-cuenta.html' && exit 1)
-          test -f public/index.html || (echo '❌ Falta public/index.html' && exit 1)
-          test -f public/reset/index.html || (echo '❌ Falta public/reset/index.html' && exit 1)
-          echo "✅ Todas las páginas legales y de recuperación están presentes."
+  # =========================================================================
+  # 2. GATE DE DEPENDENCIAS Y SCA (npm audit en raíz y app-vite-sensus)
+  # =========================================================================
+  sca-gate:
+    name: 📦 Compuerta 2: Auditoría de Dependencias (SCA)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
 
-      # Auditoría de dependencias en el prototipo interactivo (app-vite-sensus)
       - name: 🟢 Configurar Node.js (v22)
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: 'app-vite-sensus/package-lock.json'
+          cache-dependency-path: |
+            package-lock.json
+            app-vite-sensus/package-lock.json
 
-      - name: 📦 Instalar dependencias y auditar SCA (app-vite-sensus)
+      - name: 📦 Instalar dependencias raíz y auditar vulnerabilidades
+        run: |
+          npm ci --ignore-scripts
+          npm audit --audit-level=high
+
+      - name: 📦 Instalar dependencias app-vite-sensus y auditar vulnerabilidades
         working-directory: ./app-vite-sensus
         run: |
-          npm ci
+          npm ci --ignore-scripts
           npm audit --audit-level=high
 
   # =========================================================================
-  # 2. DESPLIEGUE A HOSTING NEUBOX (FTP Seguro a /public_html/sensus/)
+  # 3. GATE DE CALIDAD, LINTING, PRUEBAS Y COMPILACIÓN (Landing + Vite React)
+  # =========================================================================
+  quality-gate:
+    name: 🧪 Compuerta 3: Calidad, Linting, Pruebas y Compilación
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: 🟢 Configurar Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            app-vite-sensus/package-lock.json
+
+      - name: 📦 Instalar dependencias raíz
+        run: npm ci --ignore-scripts
+
+      - name: 🔍 Linting e integridad de assets estáticos
+        run: npm run lint
+
+      - name: 🧪 Ejecutar pruebas unitarias (Node Test Runner)
+        run: npm run test:unit
+
+      - name: 🏗️ Compilar Landing Page y parciales (build.js)
+        run: npm run build
+
+      - name: 🔍 Re-verificación de assets post-build
+        run: node scripts/check-assets.js
+
+      - name: ⚛️ Compilación y chequeo de tipos en app-vite-sensus (TypeScript + Vite)
+        working-directory: ./app-vite-sensus
+        run: |
+          npm ci --ignore-scripts
+          npx tsc --noEmit
+          npm run build
+
+  # =========================================================================
+  # 4. GATE DE INTEGRIDAD DE PLATAFORMA Y POLÍTICAS GOOGLE PLAY
+  # =========================================================================
+  integrity-gate:
+    name: 📱 Compuerta 4: Integridad Criptográfica y Google Play
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 📱 Ejecutar verificación de cumplimiento de assetlinks y páginas legales
+        run: python3 scripts/verify-compliance.py
+
+  # =========================================================================
+  # 5. DESPLIEGUE A PRODUCCIÓN NEUBOX (EXCLUSIVO TRAS APROBAR TODAS LAS COMPUERTAS)
   # =========================================================================
   deploy:
     name: 🚀 Despliegue seguro a Neubox
-    needs: [security-gate]
+    needs: [secrets-gate, sca-gate, quality-gate, integrity-gate]
     runs-on: ubuntu-24.04
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && success()
 
     steps:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v4
+
+      - name: 🟢 Configurar Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 🏗️ Compilar Landing Page limpia para producción
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          node scripts/check-assets.js
 
       # =====================================================================
       # SUBIDA DE LA LANDING A /public_html/sensus/
