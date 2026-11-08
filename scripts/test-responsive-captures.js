@@ -97,29 +97,22 @@ server.listen(9877, async () => {
     process.exit(1);
   });
 
-  // Esperar a que Chrome levante el endpoint CDP
-  await new Promise(r => setTimeout(r, 1500));
+  let browserWsUrl = '';
+  const wsReadyPromise = new Promise((resolve, reject) => {
+    chromeProc.stderr.on('data', (chunk) => {
+      const text = chunk.toString();
+      const match = text.match(/ws:\/\/127\.0\.0\.1:\d+\/devtools\/browser\/[a-zA-Z0-9-]+/);
+      if (match) {
+        browserWsUrl = match[0];
+        resolve(browserWsUrl);
+      }
+    });
+    setTimeout(() => reject(new Error('Tiempo de espera agotado para el endpoint de Chrome')), 10000);
+  });
 
   try {
-    // Esperar a que haya una página abierta
-    await new Promise(r => setTimeout(r, 800));
-    const listRes = await fetch(`http://127.0.0.1:${debuggingPort}/json/list`);
-    const pages = await listRes.json();
-    const page = pages.find(p => p.type === 'page') || pages[0];
-    const ALLOWED_HOSTS = ['127.0.0.1', 'localhost'];
-    const rawWsUrl = String(page?.webSocketDebuggerUrl || '');
-    const parsedWs = new URL(rawWsUrl);
-    if (
-      !ALLOWED_HOSTS.includes(parsedWs.hostname) ||
-      parsedWs.protocol !== 'ws:' ||
-      parsedWs.port !== String(debuggingPort)
-    ) {
-      throw new Error('Invalid or untrusted WebSocket debugger URL');
-    }
-
-    const cleanPath = parsedWs.pathname.replace(/[^a-zA-Z0-9_\/-]/g, '');
-    const safeWsUrl = `ws://127.0.0.1:${debuggingPort}${cleanPath}`;
-    console.log('Conectado a la página de Chrome:', safeWsUrl);
+    const safeWsUrl = await wsReadyPromise;
+    console.log('Conectado al endpoint seguro de Chrome:', safeWsUrl);
 
     const ws = new WebSocket(safeWsUrl);
 
@@ -129,6 +122,7 @@ server.listen(9877, async () => {
     });
 
     let msgId = 1;
+    let attachedSessionId = null;
     function send(method, params = {}) {
       return new Promise((resolve) => {
         const id = msgId++;
@@ -140,14 +134,25 @@ server.listen(9877, async () => {
           }
         };
         ws.addEventListener('message', handler);
-        ws.send(JSON.stringify({ id, method, params }));
+        const payload = { id, method, params };
+        if (attachedSessionId) {
+          payload.sessionId = attachedSessionId;
+        }
+        ws.send(JSON.stringify(payload));
       });
+    }
+
+    // Obtener páginas y adjuntar sesión
+    const targets = await send('Target.getTargets');
+    const pageTarget = (targets && targets.targetInfos) ? targets.targetInfos.find(t => t.type === 'page') : null;
+    if (pageTarget && pageTarget.targetId) {
+      const attachRes = await send('Target.attachToTarget', { targetId: pageTarget.targetId, flatten: true });
+      attachedSessionId = attachRes.sessionId;
     }
 
     // Inicializar CDP
     await send('Page.enable');
     await send('DOM.enable');
-
     const resultsSummary = [];
 
     for (const vp of VIEWPORTS) {
