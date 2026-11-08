@@ -42,20 +42,37 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let reqPath = decodeURIComponent(req.url.split('?')[0]);
-  if (reqPath === '/') reqPath = '/index.html';
-  const filePath = path.join(PUBLIC_DIR, reqPath);
+  const reqUrl = new URL(req.url || '/', 'http://localhost:9877');
+  let pathname = decodeURIComponent(reqUrl.pathname);
+  if (pathname === '/') pathname = '/index.html';
 
-  if (!fs.existsSync(filePath)) {
-    res.writeHead(404);
-    res.end('Not Found');
+  const baseDir = path.resolve(PUBLIC_DIR);
+  const normalizedPath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, '');
+  const resolvedPath = path.resolve(baseDir, '.' + normalizedPath);
+
+  if (!resolvedPath.startsWith(baseDir)) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('Forbidden');
     return;
   }
 
-  const ext = path.extname(filePath).toLowerCase();
+  const ext = path.extname(resolvedPath).toLowerCase();
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-  res.writeHead(200, { 'Content-Type': contentType });
-  fs.createReadStream(filePath).pipe(res);
+
+  const stream = fs.createReadStream(resolvedPath);
+  stream.on('open', () => {
+    res.writeHead(200, { 'Content-Type': contentType });
+    stream.pipe(res);
+  });
+  stream.on('error', (err) => {
+    if (err.code === 'ENOENT') {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Not Found');
+    } else {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('Server Error');
+    }
+  });
 });
 
 server.listen(9877, async () => {
@@ -89,10 +106,20 @@ server.listen(9877, async () => {
     const listRes = await fetch(`http://127.0.0.1:${debuggingPort}/json/list`);
     const pages = await listRes.json();
     const page = pages.find(p => p.type === 'page') || pages[0];
-    const wsUrl = page.webSocketDebuggerUrl;
-    console.log('Conectado a la página de Chrome:', wsUrl);
+    const rawWsUrl = String(page.webSocketDebuggerUrl || '');
+    const parsedWs = new URL(rawWsUrl);
+    if (
+      parsedWs.protocol !== 'ws:' ||
+      (parsedWs.hostname !== '127.0.0.1' && parsedWs.hostname !== 'localhost') ||
+      Number(parsedWs.port) !== debuggingPort
+    ) {
+      throw new Error('Invalid or untrusted WebSocket debugger URL');
+    }
 
-    const ws = new WebSocket(wsUrl);
+    const safeWsUrl = parsedWs.href.replace(/[\r\n]/g, '');
+    console.log('Conectado a la página de Chrome:', safeWsUrl);
+
+    const ws = new WebSocket(safeWsUrl);
 
     await new Promise((resolve, reject) => {
       ws.onopen = resolve;

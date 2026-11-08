@@ -1,5 +1,6 @@
 export function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  if (typeof value !== 'string') return false;
+  return /^[^\s@]+@[^@\s.]+(\.[^@\s.]+)+$/.test(value.trim());
 }
 
 export function validateContactForm({ name, email, message }) {

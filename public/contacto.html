@@ -79,7 +79,8 @@
                 <p class="form-error" id="contactMessageError" role="alert"></p>
               </div>
 
-              <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <label for="contactGotcha" class="visually-hidden">No llenar este campo</label>
+              <input type="text" id="contactGotcha" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
 
               <button type="submit" class="btn-violet-pill" id="contactSubmit">Enviar mensaje</button>
               <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
