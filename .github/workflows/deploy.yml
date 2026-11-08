@@ -34,14 +34,23 @@ jobs:
       - name: 📱 Validar public/.well-known/assetlinks.json
         run: |
           python3 -c "
-          import json
+          import json, re
           with open('public/.well-known/assetlinks.json') as f:
               data = json.load(f)
               assert len(data) > 0, 'assetlinks.json está vacío'
-              target = data[0].get('target', {})
+              entry = data[0]
+              relations = entry.get('relation', [])
+              assert 'delegate_permission/common.handle_all_urls' in relations, 'Falta permiso handle_all_urls'
+              assert 'delegate_permission/common.get_login_creds' in relations, 'Falta permiso get_login_creds'
+              target = entry.get('target', {})
+              assert target.get('namespace') == 'android_app', 'Namespace debe ser android_app'
               assert target.get('package_name') == 'sensus.com', 'Package name inválido'
-              assert len(target.get('sha256_cert_fingerprints', [])) > 0, 'Falta huella SHA-256'
-          print('✅ assetlinks.json validado formalmente')
+              fingerprints = target.get('sha256_cert_fingerprints', [])
+              assert len(fingerprints) > 0, 'Falta huella SHA-256'
+              pattern = re.compile(r'^([0-9A-F]{2}:){31}[0-9A-F]{2}$')
+              for fp in fingerprints:
+                  assert pattern.match(fp), f'Formato SHA-256 inválido: {fp}'
+          print('✅ assetlinks.json validado formalmente con permisos y huellas')
           "
 
       # Verificación de URLs legales obligatorias por Google Play
