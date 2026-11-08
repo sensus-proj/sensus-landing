@@ -15,7 +15,7 @@ jobs:
   # 1. GATE DE SECRETOS Y CREDENCIALES (Gitleaks & TruffleHog)
   # =========================================================================
   secrets-gate:
-    name: 🔒 Compuerta 1: Escaneo de Secretos
+    name: '🔒 Compuerta 1: Escaneo de Secretos'
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio completo
@@ -32,14 +32,13 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          head: ${{ github.sha }}
           extra_args: --only-verified
 
   # =========================================================================
   # 2. GATE DE DEPENDENCIAS Y SCA (npm audit en raíz y app-vite-sensus)
   # =========================================================================
   sca-gate:
-    name: 📦 Compuerta 2: Auditoría de Dependencias (SCA)
+    name: '📦 Compuerta 2: Auditoría de Dependencias (SCA)'
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio
@@ -69,7 +68,7 @@ jobs:
   # 3. GATE DE CALIDAD, LINTING, PRUEBAS Y COMPILACIÓN (Landing + Vite React)
   # =========================================================================
   quality-gate:
-    name: 🧪 Compuerta 3: Calidad, Linting, Pruebas y Compilación
+    name: '🧪 Compuerta 3: Calidad, Linting, Pruebas y Compilación'
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio
@@ -110,7 +109,7 @@ jobs:
   # 4. GATE DE INTEGRIDAD DE PLATAFORMA Y POLÍTICAS GOOGLE PLAY
   # =========================================================================
   integrity-gate:
-    name: 📱 Compuerta 4: Integridad Criptográfica y Google Play
+    name: '📱 Compuerta 4: Integridad Criptográfica y Google Play'
     runs-on: ubuntu-24.04
     steps:
       - name: 📥 Clonar repositorio
