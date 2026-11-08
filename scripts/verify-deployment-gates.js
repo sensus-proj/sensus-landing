@@ -43,10 +43,9 @@ async function verifyAllChecks() {
     const data = await fetchJson(url);
     const checkRuns = data.check_runs || [];
 
-    // Excluir compuerta actual y el paso de despliegue para evitar autorreferencias
-    const currentJobName = process.env.GITHUB_JOB || 'sonar-and-devsecops-gate';
+    // Excluir compuertas del propio workflow de despliegue para evitar autorreferencias
     const externalChecks = checkRuns.filter(
-      (c) => !c.name.includes(currentJobName) && !c.name.includes('Despliegue')
+      (c) => !c.name.includes('Compuerta') && !c.name.includes('Despliegue')
     );
 
     const pending = externalChecks.filter((c) => c.status !== 'completed');
@@ -55,7 +54,7 @@ async function verifyAllChecks() {
     );
     const sonarCheck = externalChecks.find((c) => c.name.toLowerCase().includes('sonarcloud'));
 
-    console.log(`[Intento ${attempt}/${maxAttempts}] Checks totales: ${externalChecks.length} | Pendientes: ${pending.length} | Fallidos: ${failed.length}`);
+    console.log(`[Intento ${attempt}/${maxAttempts}] Checks externos: ${externalChecks.length} | Pendientes: ${pending.length} | Fallidos: ${failed.length}`);
 
     // Si algún check externo ya falló, abortar de inmediato sin esperar
     if (failed.length > 0) {
@@ -82,7 +81,7 @@ async function verifyAllChecks() {
     }
 
     // Si llegamos aquí, todos los checks externos están 'completed' y ninguno falló
-    console.log('\n✅ Todas las suites de análisis y DevSecOps concluyeron con éxito:');
+    console.log('\n✅ Todas las suites externas de análisis y DevSecOps concluyeron con éxito:');
     for (const c of externalChecks) {
       console.log(`   - ✔ [${c.name}]: ${c.conclusion}`);
     }
