@@ -2,59 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=../reset.html">
   <title>Restablecer Contraseña - Sensus</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background: #F8F5FC; color: #1F162B; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .card { background: #FFFFFF; max-width: 440px; width: 100%; border-radius: 24px; padding: 36px 28px; box-shadow: 0 10px 30px rgba(74, 20, 140, 0.08); text-align: center; }
-    .icon-badge { width: 72px; height: 72px; background: rgba(74, 20, 140, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #4A148C; font-size: 32px; }
-    h1 { font-size: 22px; font-weight: 700; color: #1F162B; margin-bottom: 8px; }
-    p { font-size: 14px; color: #716B7C; line-height: 1.5; margin-bottom: 24px; }
-    .btn { display: block; width: 100%; background: #4A148C; color: #FFFFFF; text-decoration: none; padding: 15px 20px; border-radius: 14px; font-weight: 700; font-size: 15px; margin-bottom: 12px; transition: background 0.2s; border: none; cursor: pointer; }
-    .btn:hover { background: #380E6B; }
-    .btn-secondary { display: block; width: 100%; background: #F3EEF9; color: #4A148C; text-decoration: none; padding: 13px 20px; border-radius: 14px; font-weight: 600; font-size: 14px; transition: background 0.2s; }
-    .btn-secondary:hover { background: #E9DEFA; }
-    .divider { height: 1px; background: #ECE6F3; margin: 24px 0; }
-    .token-box { background: #F8F5FC; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 12px; color: #716B7C; word-break: break-all; margin-bottom: 16px; }
-    .footer { font-size: 12px; color: #9A94A8; margin-top: 16px; }
-  </style>
+  <script>
+    window.location.replace('../reset.html' + window.location.search);
+  </script>
 </head>
 <body>
-  <div class="card">
-    <div class="icon-badge">🔒</div>
-    <h1>Restablecer Contraseña</h1>
-    <p>Redirigiendo a tu aplicación <strong>Sensus</strong> para definir tu nueva contraseña de forma segura...</p>
-
-    <a id="btnIntent" href="#" class="btn">Abrir en la App Sensus</a>
-    <a id="btnScheme" href="#" class="btn-secondary">Abrir directo (sensus://)</a>
-
-    <div class="divider"></div>
-
-    <p style="margin-bottom: 8px; font-size: 12px; font-weight: 600;">¿Abres desde computadora o no se abrió la app?</p>
-    <div id="tokenDisplay" class="token-box">Detectando token...</div>
-
-    <div class="footer">Sensus • Rescate inteligente de alimentos y comercio local</div>
-  </div>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get('token') || '';
-
-    const intentUrl = `intent://reset?token=${encodeURIComponent(token)}#Intent;scheme=sensus;package=sensus.com;end`;
-    const schemeUrl = `sensus://reset?token=${encodeURIComponent(token)}`;
-
-    document.getElementById('btnIntent').href = intentUrl;
-    document.getElementById('btnScheme').href = schemeUrl;
-    document.getElementById('tokenDisplay').innerText = token ? `Token: ${token}` : 'Sin token en la URL';
-
-    // Intento de redirección automática si es Android
-    if (/android/i.test(navigator.userAgent) && token) {
-      window.location.href = intentUrl;
-      setTimeout(() => {
-        window.location.href = schemeUrl;
-      }, 1000);
-    }
-  </script>
 </body>
 </html>

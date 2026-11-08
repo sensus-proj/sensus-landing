@@ -1,0 +1,11 @@
+.page-privacidad .legal-accordion-box {
+  max-width: 100%;
+}
+
+.page-privacidad .page-header-title {
+  font-size: clamp(22px, 4vw, 32px);
+}
+
+.page-privacidad .page-header-subtitle {
+  font-size: 0.95rem;
+}

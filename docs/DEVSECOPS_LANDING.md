@@ -91,6 +91,15 @@ Este flujo condensa las mejores prácticas aplicadas a la landing con compuerta 
 
 ---
 
+### 4. Política Estricta de No-Evasión (Non-Bypass & Non-Evasion)
+
+En cumplimiento de la [CONSTITUTION.md](../CONSTITUTION.md) y [AGENTS.md](../AGENTS.md):
+- **Ningún proceso de validación de seguridad de la app, ni de escaneo de código se debe de saltar, skipear, brincar o burlar.**
+- Queda prohibido aplicar exclusiones indiscriminadas (`sonar.exclusions`), directivas de supresión injustificadas o banderas `--no-verify`.
+- Todas las alertas y vulnerabilidades detectadas por SonarCloud, Semgrep, Gitleaks, `npm audit` o validadores de `assetlinks.json` deben resolverse de raíz en el código fuente.
+
+---
+
 ### Conclusión
 
 De todo lo implementado en el móvil:

@@ -1,0 +1,234 @@
+/* Portada de pantalla completa con footer scrollable */
+.page-home--hero-scroll {
+  min-height: 100dvh;
+  overflow-x: clip;
+  overflow-y: auto;
+  background-color: var(--color-bg);
+}
+
+.page-home--hero-scroll .page-wrapper {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+/* Hero ocupa el 100% de la pantalla inicial */
+.hero-parallax {
+  height: 100dvh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* Marca Sensus centrada en la parte superior */
+.hero-parallax__top-brand {
+  position: absolute;
+  top: clamp(14px, 2.5vh, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand-clean--floating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 18px;
+  border-radius: var(--radius-full, 9999px);
+  box-shadow: 0 4px 18px -2px rgba(33, 26, 46, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  min-height: 44px;
+}
+
+.brand-title--hero {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.02em;
+}
+
+/* Fondo Parallax */
+.hero-parallax__bg-wrap {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-parallax__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.08);
+  will-change: transform;
+  display: block;
+}
+
+/* Capa frontal */
+.hero-parallax__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: clamp(20px, 4vw, 52px);
+  background: linear-gradient(
+    to top,
+    rgba(15, 10, 25, 0.72) 0%,
+    rgba(15, 10, 25, 0.35) 30%,
+    rgba(15, 10, 25, 0) 60%
+  );
+  box-sizing: border-box;
+}
+
+/* Título en la esquina inferior izquierda: tono #F97316 SIN borde blanco */
+.hero-parallax__title-box {
+  max-width: clamp(280px, 48vw, 640px);
+  z-index: 6;
+  will-change: transform;
+}
+
+.hero-parallax__title {
+  color: #F97316;
+  font-size: clamp(1.85rem, 3.8vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0;
+  /* Sin borde blanco */
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.hero-parallax__title span {
+  display: inline-block;
+}
+
+/* Botón en la esquina inferior derecha */
+.hero-parallax__cta-box {
+  z-index: 6;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  will-change: transform;
+}
+
+.hero-parallax__cta {
+  display: flex;
+  align-items: center;
+}
+
+.btn-store--hero-lg {
+  height: 68px;
+  min-height: 68px;
+  padding: 12px 34px;
+  min-width: 270px;
+  max-width: 360px;
+  gap: 14px;
+  border-radius: var(--radius-lg, 18px);
+  background-color: #171120;
+  box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.45);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.btn-store--hero-lg svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.btn-store--hero-lg .btn-store__caption {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+}
+
+.btn-store--hero-lg .btn-store__brand {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (hover: hover) {
+  .btn-store--hero-lg:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.55);
+    background-color: #211A2E;
+  }
+}
+
+/* Adaptación móvil */
+@media (max-width: 767px) {
+  .hero-parallax__overlay {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 16px;
+    padding: clamp(16px, 3vh, 28px) 16px;
+    background: linear-gradient(
+      to top,
+      rgba(15, 10, 25, 0.82) 0%,
+      rgba(15, 10, 25, 0.45) 40%,
+      rgba(15, 10, 25, 0) 70%
+    );
+  }
+
+  .hero-parallax__title-box {
+    max-width: 100%;
+  }
+
+  .hero-parallax__title {
+    font-size: clamp(1.5rem, 6vw, 2.1rem);
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-parallax__cta-box {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .hero-parallax__cta {
+    width: 100%;
+  }
+
+  .btn-store--hero-lg {
+    width: 100%;
+    max-width: 100%;
+    height: 60px;
+    min-height: 60px;
+    padding: 10px 20px;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .btn-store--hero-lg svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .btn-store--hero-lg .btn-store__brand {
+    font-size: 18px;
+  }
+}
+
+/* Pie de página scrollable debajo del hero */
+.page-home--hero-scroll .sensus-footer {
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}

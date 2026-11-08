@@ -2,6 +2,10 @@
 
 React + Vite + Tailwind CSS project running inside Figma Make.
 
+## 🛡️ Regla Fundamental DevSecOps (Inviolable)
+> **Ningún proceso de validación de seguridad de la app, ni de escaneo de código se debe de saltar, skipear, brincar o burlar, ya que esto no va conforme a la metodología DevSecOps.**  
+> Toda corrección debe realizarse directamente en el código fuente. Queda prohibido eludir escáneres, compuertas de calidad o linters. Ver [CONSTITUTION.md](../CONSTITUTION.md) y [AGENTS.md](../AGENTS.md).
+
 ## Development Server
 
 A Vite development server is **already running** on `$PORT` (default 8443). You don't need to start it manually.

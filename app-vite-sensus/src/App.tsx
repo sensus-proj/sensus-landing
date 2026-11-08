@@ -698,7 +698,7 @@ function BottomNav({
   locked?: boolean
   onNavigate?: (id: string) => void
 }) {
-  const items: { id: string label: string icon: IconName }[] = [
+  const items: { id: string; label: string; icon: IconName }[] = [
     { id: "home", label: "Inicio", icon: "home" },
     { id: "map", label: "Mapa", icon: "map" },
     { id: "chat", label: "Chef", icon: locked ? "lock" : "chef" },
@@ -767,9 +767,21 @@ function BottomNav({
   )
 }
 
-function OfferCard({ o, onClick }: { o: Offer onClick?: () => void }) {
+function OfferCard({ o, onClick }: { o: Offer; onClick?: () => void }) {
   return (
     <div
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
       onClick={onClick}
       style={{
         background: "white",
@@ -904,7 +916,7 @@ function OfferCard({ o, onClick }: { o: Offer onClick?: () => void }) {
   )
 }
 
-function Av({ f, size = 36 }: { f: typeof FRIENDS[0] size?: number }) {
+function Av({ f, size = 36 }: { f: typeof FRIENDS[0]; size?: number }) {
   return (
     <div
       style={{
@@ -2612,7 +2624,18 @@ function ScreenUserHome({
             }}
           />
         </button>
-        <div onClick={onProfile} style={{ cursor: "pointer" }}>
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onProfile?.();
+            }
+          }}
+          onClick={onProfile}
+          style={{ cursor: "pointer" }}
+        >
           <Av f={FRIENDS[0]} size={34} />
         </div>
       </div>
@@ -2722,6 +2745,14 @@ function ScreenUserHome({
           ].map(({ f, o, note }, i) => (
             <div
               key={i}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onProduct?.();
+                }
+              }}
               onClick={onProduct}
               style={{
                 background: "white",
@@ -4268,6 +4299,7 @@ function ScreenPublishOffer({
         >
           <div>
             <label
+              htmlFor="offer-product-name"
               style={{
                 display: "block",
                 color: T.text,
@@ -4279,12 +4311,14 @@ function ScreenPublishOffer({
               Nombre del producto
             </label>
             <input
+              id="offer-product-name"
               defaultValue="Canasta de frutas y verduras"
               style={inputStyle}
             />
           </div>
           <div>
             <label
+              htmlFor="offer-product-category"
               style={{
                 display: "block",
                 color: T.text,
@@ -4296,6 +4330,7 @@ function ScreenPublishOffer({
               Categoría
             </label>
             <select
+              id="offer-product-category"
               style={{ ...inputStyle, appearance: "none" }}
               defaultValue="Frutas y verduras"
             >
@@ -4310,6 +4345,7 @@ function ScreenPublishOffer({
           >
             <div>
               <label
+                htmlFor="offer-original-price"
                 style={{
                   display: "block",
                   color: T.text,
@@ -4321,6 +4357,7 @@ function ScreenPublishOffer({
                 Precio original
               </label>
               <input
+                id="offer-original-price"
                 value={original}
                 onChange={(e) => setOriginal(e.target.value)}
                 type="number"
@@ -4329,6 +4366,7 @@ function ScreenPublishOffer({
             </div>
             <div>
               <label
+                htmlFor="offer-discount-price"
                 style={{
                   display: "block",
                   color: T.text,
@@ -4340,6 +4378,7 @@ function ScreenPublishOffer({
                 Precio oferta
               </label>
               <input
+                id="offer-discount-price"
                 value={offer}
                 onChange={(e) => setOffer(e.target.value)}
                 type="number"
@@ -4371,6 +4410,7 @@ function ScreenPublishOffer({
           >
             <div>
               <label
+                htmlFor="offer-stock"
                 style={{
                   display: "block",
                   color: T.text,
@@ -4381,10 +4421,11 @@ function ScreenPublishOffer({
               >
                 Stock disponible
               </label>
-              <input defaultValue="12 unidades" style={inputStyle} />
+              <input id="offer-stock" defaultValue="12 unidades" style={inputStyle} />
             </div>
             <div>
               <label
+                htmlFor="offer-limit-date"
                 style={{
                   display: "block",
                   color: T.text,
@@ -4395,11 +4436,12 @@ function ScreenPublishOffer({
               >
                 Fecha límite
               </label>
-              <input type="date" style={inputStyle} />
+              <input id="offer-limit-date" type="date" style={inputStyle} />
             </div>
           </div>
           <div>
             <label
+              htmlFor="offer-limit-time"
               style={{
                 display: "block",
                 color: T.text,
@@ -4410,10 +4452,10 @@ function ScreenPublishOffer({
             >
               Hora límite
             </label>
-            <input type="time" style={inputStyle} />
+            <input id="offer-limit-time" type="time" style={inputStyle} />
           </div>
           <div>
-            <label
+            <span
               style={{
                 display: "block",
                 color: T.text,
@@ -4423,7 +4465,7 @@ function ScreenPublishOffer({
               }}
             >
               Etiqueta de impacto
-            </label>
+            </span>
             <div style={{ display: "flex", gap: 8 }}>
               <button
                 style={{
@@ -5734,7 +5776,7 @@ function ScreenSearchDiscovery({
   const [distance, setDistance] = useState(2)
   const [discount, setDiscount] = useState("30%+")
   const [sort, setSort] = useState("Más cercano")
-  const categories: { label: string icon: IconName }[] = [
+  const categories: { label: string; icon: IconName }[] = [
     { label: "Frutas y verduras", icon: "strawberry" },
     { label: "Lácteos y huevos", icon: "milk" },
     { label: "Panadería", icon: "package" },
@@ -6035,6 +6077,16 @@ function ScreenSearchDiscovery({
 
       {showFilters && (
         <div
+          role="button"
+          tabIndex={0}
+          aria-label="Cerrar filtros"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === "Escape" || e.key === " ") {
+              e.preventDefault();
+              setShowFilters(false);
+            }
+          }}
+          onClick={() => setShowFilters(false)}
           style={{
             position: "absolute",
             inset: 0,
@@ -6043,9 +6095,13 @@ function ScreenSearchDiscovery({
             display: "flex",
             alignItems: "flex-end",
           }}
-          onClick={() => setShowFilters(false)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Filtros de búsqueda"
+            tabIndex={-1}
+            onKeyDown={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
             style={{
               width: "100%",
@@ -6100,6 +6156,7 @@ function ScreenSearchDiscovery({
             <div style={{ marginBottom: 18 }}>
               <div style={{ display: "flex", marginBottom: 8 }}>
                 <label
+                  htmlFor="filter-max-distance"
                   style={{
                     flex: 1,
                     color: T.text,
@@ -6116,6 +6173,7 @@ function ScreenSearchDiscovery({
                 </span>
               </div>
               <input
+                id="filter-max-distance"
                 type="range"
                 min=".5"
                 max="2"
@@ -6137,7 +6195,7 @@ function ScreenSearchDiscovery({
               </div>
             </div>
             <div style={{ marginBottom: 18 }}>
-              <label
+              <span
                 style={{
                   display: "block",
                   color: T.text,
@@ -6147,7 +6205,7 @@ function ScreenSearchDiscovery({
                 }}
               >
                 Descuento mínimo
-              </label>
+              </span>
               <div style={{ display: "flex", gap: 8 }}>
                 {["30%+", "50%+", "70%+"].map((d) => (
                   <button
@@ -6172,7 +6230,7 @@ function ScreenSearchDiscovery({
               </div>
             </div>
             <div style={{ marginBottom: 20 }}>
-              <label
+              <span
                 style={{
                   display: "block",
                   color: T.text,
@@ -6182,7 +6240,7 @@ function ScreenSearchDiscovery({
                 }}
               >
                 Ordenar por
-              </label>
+              </span>
               <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
                 {[
                   "Más cercano",
@@ -7692,7 +7750,7 @@ const SCREEN_IDS = [
 ] as const
 type ScreenId = typeof SCREEN_IDS[number]
 
-const SCREEN_META: Record<ScreenId, { label: string tag: string }> = {
+const SCREEN_META: Record<ScreenId, { label: string; tag: string }> = {
   splash: { label: "Bienvenida", tag: "01" },
   guest: { label: "Inicio · Invitado", tag: "02" },
   register: { label: "Registro", tag: "03" },
@@ -8558,10 +8616,20 @@ export default function App() {
             {FIGMA_GALLERY.map((item) => (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActive(item.screenId);
+                    setViewMode("figma");
+                    setShowGallery(false);
+                  }
+                }}
                 onClick={() => {
-                  setActive(item.screenId)
-                  setViewMode("figma")
-                  setShowGallery(false)
+                  setActive(item.screenId);
+                  setViewMode("figma");
+                  setShowGallery(false);
                 }}
                 style={{
                   background: "rgba(255,255,255,0.05)",
