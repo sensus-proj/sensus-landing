@@ -7,6 +7,7 @@ const root = path.join(__dirname, '..');
 const partialsDir = path.join(root, 'partials');
 const headerPartial = fs.readFileSync(path.join(partialsDir, 'header.html'), 'utf8');
 const footerPartial = fs.readFileSync(path.join(partialsDir, 'footer.html'), 'utf8');
+const socialPartial = fs.readFileSync(path.join(partialsDir, 'social.html'), 'utf8');
 
 function adjust(partial, prefix) {
   if (!prefix) return partial;
@@ -44,6 +45,7 @@ for (const p of pages) {
   const prefix = p.prefix;
   html = inject(html, 'header', adjust(headerPartial, prefix));
   html = inject(html, 'footer', adjust(footerPartial, prefix));
+  html = inject(html, 'social', socialPartial);
   fs.writeFileSync(full, html);
   console.log('Built', p.file);
 }

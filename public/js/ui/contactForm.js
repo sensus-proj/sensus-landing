@@ -1,5 +1,6 @@
 import { validateContactForm } from '../utils/validators.js';
 import { sendContactMessage } from '../services/contactService.js';
+import { trackEvent } from '../services/analytics.js';
 
 export function initContactForm(form) {
   if (!form) return;
@@ -67,6 +68,7 @@ export function initContactForm(form) {
 
     try {
       await sendContactMessage(payload);
+      trackEvent('contacto_enviado', { formulario: 'contacto' });
       if (status) {
         status.textContent = '¡Gracias! Recibimos tu mensaje.';
         status.classList.add('is-success');

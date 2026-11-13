@@ -154,3 +154,28 @@
     margin-left: auto;
   }
 }
+
+@media (max-width: 400px) {
+  .top-nav .social-links {
+    gap: 8px;
+    padding: 4px 4px 4px 10px;
+  }
+
+  .top-nav .social-links__label::before {
+    display: none;
+  }
+
+  .top-nav .social-links__list {
+    gap: 4px;
+  }
+
+  .top-nav .social-links__item {
+    width: 32px;
+    height: 32px;
+  }
+
+  .top-nav .social-links__item svg {
+    width: 17px;
+    height: 17px;
+  }
+}
