@@ -286,3 +286,58 @@
   position: relative;
   z-index: 10;
 }
+
+/* Redes sociales en la esquina superior derecha del hero */
+.hero-parallax__social {
+  position: absolute;
+  top: clamp(14px, 2.5vh, 28px);
+  right: clamp(16px, 4vw, 52px);
+  z-index: 10;
+}
+
+@media (max-width: 1080px) {
+  .hero-parallax__social .social-links__label-long {
+    display: none;
+  }
+
+  .hero-parallax__social .social-links__label-short {
+    display: inline;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-parallax__social {
+    top: 12px;
+    right: 12px;
+  }
+
+  .hero-parallax__social .social-links {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 5px 5px;
+    border-radius: 24px;
+  }
+
+  .hero-parallax__social .social-links__label {
+    font-size: 0.6875rem;
+  }
+
+  .hero-parallax__social .social-links__label::before {
+    display: none;
+  }
+
+  .hero-parallax__social .social-links__list {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-parallax__social .social-links__item {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero-parallax__social .social-links__item svg {
+    width: 19px;
+    height: 19px;
+  }
+}
