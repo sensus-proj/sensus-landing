@@ -85,6 +85,7 @@
   z-index: 5;
   display: flex;
   justify-content: space-between;
+  gap: 32px;
   align-items: flex-end;
   padding: clamp(20px, 4vw, 52px);
   background: linear-gradient(
@@ -99,17 +100,19 @@
 /* Título en la esquina inferior izquierda: tono #F97316 SIN borde blanco */
 .hero-parallax__title-box {
   max-width: clamp(280px, 48vw, 640px);
+  min-width: 0;
   z-index: 6;
   will-change: transform;
 }
 
 .hero-parallax__title {
   color: #F97316;
-  font-size: clamp(1.85rem, 3.8vw, 3.4rem);
+  font-size: clamp(1.5rem, 3.4vw, 3.4rem);
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.02em;
   margin: 0;
+  white-space: nowrap;
   /* Sin borde blanco */
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
@@ -119,8 +122,41 @@
   display: inline-block;
 }
 
+.hero-parallax__subtitle {
+  margin: 16px 0 0;
+  max-width: 42ch;
+  color: #FFFFFF;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.5;
+  text-wrap: pretty;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-parallax__title span {
+    animation: hero-text-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-parallax__subtitle {
+    animation: hero-text-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+  }
+}
+
+@keyframes hero-text-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Botón en la esquina inferior derecha */
 .hero-parallax__cta-box {
+  flex-shrink: 0;
   z-index: 6;
   display: flex;
   align-items: flex-end;

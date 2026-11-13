@@ -11,7 +11,7 @@
 
   <link rel="icon" type="image/png" href="assets/logo.png">
 
-  <link rel="preload" as="image" href="assets/image.png" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" href="assets/hero.webp" imagesrcset="assets/hero-960.webp 960w, assets/hero.webp 2048w" imagesizes="126vw" fetchpriority="high">
 
   <link rel="stylesheet" href="css/main.css">
 <!-- Google Tag Manager -->
@@ -88,7 +88,9 @@ height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Ma
 
       <div class="hero-parallax__bg-wrap">
         <img
-          src="assets/image.png"
+          src="assets/hero.webp"
+          srcset="assets/hero-960.webp 960w, assets/hero.webp 2048w"
+          sizes="126vw"
           alt="Sensus: Lo bueno, por menos"
           class="hero-parallax__bg"
           width="2048"
@@ -101,9 +103,9 @@ height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Ma
       <div class="hero-parallax__overlay">
         <div class="hero-parallax__title-box">
           <h1 class="hero-parallax__title">
-            Lo bueno,<br>
-            <span>por menos.</span>
+            <span>Lo bueno, por menos</span>
           </h1>
+          <p class="hero-parallax__subtitle">Ahorra en tu despensa, apoya al comercio local y dile adiós al desperdicio</p>
         </div>
 
         <div class="hero-parallax__cta-box">

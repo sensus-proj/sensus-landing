@@ -10,7 +10,9 @@ const required = [
   'hero-people-1200.webp',
   'hero-people-1200.jpg',
   'logo.png',
-  'image.png'
+  'image.png',
+  'hero.webp',
+  'hero-960.webp'
 ];
 for (const file of required) {
   const full = path.join(publicAssets, file);
