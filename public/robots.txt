@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /reset.html
+Disallow: /reset/
+
+Sitemap: https://rodnix.com.mx/sensus/sitemap.xml
