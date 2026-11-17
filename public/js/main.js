@@ -4,7 +4,9 @@ import { markActiveNav } from './ui/activeNav.js';
 import { initContactForm } from './ui/contactForm.js';
 import { initHeroParallax } from './ui/parallax.js';
 import { initClickTracking } from './services/analytics.js';
+import { initInviteHandler } from './ui/inviteHandler.js';
 
+initInviteHandler();
 initClickTracking();
 markActiveNav();
 initHeroParallax();
