@@ -1,0 +1,247 @@
+/* ==========================================================================
+   Sensus · Marca transparente, redes plegables y sección "Así funciona".
+   ========================================================================== */
+
+/* ---------- Marca sin fondo ---------- */
+.hero-parallax__top-brand .brand-clean {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  padding: 4px 8px;
+}
+
+.hero-parallax__top-brand .brand-title--hero {
+  color: #FFFFFF;
+  text-shadow: 0 2px 14px rgba(10, 4, 24, 0.7);
+}
+
+.hero-parallax__top-brand .brand-logo-img {
+  filter: drop-shadow(0 4px 10px rgba(10, 4, 24, 0.5));
+}
+
+/* ---------- Redes: solo iconos; el menú completo aparece al pasar el cursor ---------- */
+.hero-parallax__social .social-links {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  gap: 0;
+  padding: 5px;
+  transition: background-color 360ms var(--ease-out), box-shadow 360ms var(--ease-out), gap 360ms var(--ease-out), padding 360ms var(--ease-out);
+}
+
+.hero-parallax__social .social-links__label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(10px);
+  transition: max-width 480ms var(--ease-out), opacity 300ms ease, transform 480ms var(--ease-out);
+}
+
+.hero-parallax__social .social-links__item {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 8px 18px -8px rgba(10, 4, 24, 0.7);
+}
+
+@media (hover: hover) {
+  .hero-parallax__social .social-links:hover {
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 12px 30px -12px rgba(10, 4, 24, 0.6);
+    gap: 12px;
+    padding-left: 18px;
+  }
+
+  .hero-parallax__social .social-links:hover .social-links__label {
+    max-width: 320px;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Teclado: el menú también se abre con el foco */
+.hero-parallax__social .social-links:focus-within {
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 30px -12px rgba(10, 4, 24, 0.6);
+  gap: 12px;
+  padding-left: 18px;
+}
+
+.hero-parallax__social .social-links:focus-within .social-links__label {
+  max-width: 320px;
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 1080px) {
+  .hero-parallax__social .social-links:hover .social-links__label,
+  .hero-parallax__social .social-links:focus-within .social-links__label { max-width: 120px; }
+}
+
+/* Móvil: columna de iconos, sin etiqueta */
+@media (max-width: 640px) {
+  .hero-parallax__social .social-links,
+  .hero-parallax__social .social-links:hover,
+  .hero-parallax__social .social-links:focus-within {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    gap: 0;
+  }
+
+  .hero-parallax__social .social-links__label { display: none; }
+}
+
+/* ---------- Sección "Así funciona" ---------- */
+.how {
+  position: relative;
+  padding: clamp(64px, 11vw, 128px) 0 clamp(72px, 12vw, 136px);
+  background:
+    radial-gradient(40rem 22rem at 85% 0%, rgba(124, 58, 237, 0.12), transparent 70%),
+    radial-gradient(36rem 20rem at 5% 100%, rgba(249, 115, 22, 0.10), transparent 70%),
+    var(--color-bg);
+  z-index: 2;
+}
+
+.how__eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-orange-soft);
+  color: var(--color-orange-text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.how__title {
+  max-width: 18ch;
+  margin-bottom: clamp(32px, 5vw, 56px);
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text-main);
+  text-wrap: balance;
+}
+
+.how__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .how__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+
+.how__card {
+  --accent: var(--color-violet);
+  --accent-soft: var(--color-violet-soft);
+  position: relative;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  box-shadow: 0 18px 40px -26px rgba(76, 29, 149, 0.4);
+  overflow: hidden;
+  transition: transform 420ms var(--ease-out), box-shadow 420ms var(--ease-out), border-color 420ms var(--ease-out);
+}
+
+.how__card--orange { --accent: var(--color-orange); --accent-soft: var(--color-orange-soft); }
+.how__card--green { --accent: var(--color-green); --accent-soft: var(--color-green-soft); }
+
+/* Barra superior que se dibuja al pasar el cursor */
+.how__card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: var(--accent);
+  transform: scaleX(0.18);
+  transform-origin: left center;
+  transition: transform 600ms var(--ease-out);
+}
+
+.how__num {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent-soft);
+  transition: color 420ms ease, transform 420ms var(--ease-out);
+}
+
+.how__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  transition: transform 420ms var(--ease-pop), background-color 300ms ease, color 300ms ease;
+}
+
+.how__icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.how__card-title {
+  margin-bottom: 8px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.how__card-text {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+@media (hover: hover) {
+  .how__card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-soft);
+    box-shadow: 0 30px 54px -26px rgba(76, 29, 149, 0.5);
+  }
+
+  .how__card:hover::before { transform: scaleX(1); }
+  .how__card:hover .how__icon { transform: scale(1.1) rotate(-6deg); background: var(--accent); color: #FFFFFF; }
+  .how__card:hover .how__num { transform: translateY(-4px); color: var(--accent); opacity: 0.35; }
+}
+
+/* ---------- Pie de página: línea de acento ---------- */
+.sensus-footer { position: relative; }
+
+.sensus-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-violet), var(--color-orange), var(--color-green));
+  opacity: 0.85;
+}
+
+/* Rendimiento: sin desenfoque de fondo sobre la foto en movimiento */
+.hero-parallax__social .social-links {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
