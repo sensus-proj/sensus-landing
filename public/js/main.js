@@ -3,9 +3,13 @@ import { renderBenefits } from './ui/benefits.js';
 import { markActiveNav } from './ui/activeNav.js';
 import { initContactForm } from './ui/contactForm.js';
 import { initHeroParallax } from './ui/parallax.js';
+import { initScrollReveal } from './ui/reveal.js';
+import { initHeroTitleSplit } from './ui/heroText.js';
 import { initClickTracking } from './services/analytics.js';
 
 initClickTracking();
+initHeroTitleSplit();
+initScrollReveal();
 markActiveNav();
 initHeroParallax();
 
